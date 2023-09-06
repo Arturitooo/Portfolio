@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ["139.177.178.27", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    "general.apps.GeneralConfig",
     "todolist.apps.TodolistConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -125,9 +124,3 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
-
-LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "mainpage"
