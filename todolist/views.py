@@ -25,8 +25,12 @@ def my_todos(request):
 
     for record in todos_list:
         the_date = record.date
-        if the_date == date.today():
+        if the_date < date.today():
+            record.date = "ASAP!"
+
+        elif the_date == date.today():
             record.date = "Today"
+
         elif (the_date - date.today()).days < 7:
             record.date = the_date.strftime("%A")
 
