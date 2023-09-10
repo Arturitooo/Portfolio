@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["139.177.178.27", "127.0.0.1"]
 
 INSTALLED_APPS = [
     "general.apps.GeneralConfig",
+    "quotes.apps.QuotesConfig",
     "todolist.apps.TodolistConfig",
     "django.contrib.admin",
     "django.contrib.auth",
