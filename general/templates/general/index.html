@@ -1,4 +1,4 @@
-{% if user.is_authenticated %} Hello {{user.username}} - you can logout
+{% if user.is_authenticated %} Hello <b>{{user.username}}</b> - you can logout
 <a href="{% url 'logout' %}">here</a>
 {% else %}
 <a href="{% url 'register' %}">You can register here</a> <br />

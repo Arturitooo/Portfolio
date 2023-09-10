@@ -1,8 +1,10 @@
 import requests
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def quote(request):
     quote_api_url = "https://quotes15.p.rapidapi.com/quotes/random/"
     headers = {
