@@ -1,8 +1,11 @@
-HERE IS YOUR QUOTE:<br /><br />
+THE QUOTE:<br /><br />
 
 <center>
-  <b>{{data.content}}</b><br />
+  <h2>{{data.content}}</h2>
   <i>{{data.originator.name}} </i>
+  <br /><br /><br />
+  <button onClick="window.location.reload();">Generate new quote</button>
 </center>
-<br /><br />
+<br />
+<br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>

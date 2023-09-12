@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["139.177.178.27", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    "seotool.apps.SeotoolConfig",
     "general.apps.GeneralConfig",
     "quotes.apps.QuotesConfig",
     "todolist.apps.TodolistConfig",
