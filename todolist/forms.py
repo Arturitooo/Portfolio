@@ -1,14 +1,14 @@
 from django import forms
 from django.forms import DateInput, Textarea
-from .models import Todos
+from .models import Task
 
 
-class TodosForm(forms.ModelForm):
+class TaskForm(forms.ModelForm):
     class Meta:
-        model = Todos
-        fields = ["todopoint", "date"]
+        model = Task
+        fields = ["task", "date"]
         widgets = {
-            "todopoint": Textarea(
+            "task": Textarea(
                 attrs={
                     "required": True,
                     "class": "form-control",

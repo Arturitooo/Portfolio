@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To do Lists</title>
+  </head>
+  <body>
+    <h1>Here's everything you have to do:</h1>
+    <ul>
+      {% for record in records %} {% if record.date == "ASAP!" %}
+      <li>
+        <p style="color: red">
+          {{record.date}}: <b>{{ record.task}}</b>
+          <a
+            href="{% url 'edit_task' record.id %}"
+            style="text-decoration: none"
+            >✏️</a
+          >
+          <a
+            href="{% url 'delete_task' record.id %}"
+            style="text-decoration: none"
+            >❌</a
+          >
+        </p>
+      </li>
+      {% else %}
+      <li>
+        <p>
+          {{record.date}}: <b>{{ record.task}}</b>
+          <a
+            href="{% url 'edit_task' record.id %}"
+            style="text-decoration: none"
+            >✏️</a
+          >
+          <a
+            href="{% url 'delete_task' record.id %}"
+            style="text-decoration: none"
+            >❌</a
+          >
+        </p>
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+
+    <br />
+    <h2>Add new to do:</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <p>Explain what you're supposed to do:</p>
+        <p>{{ taskform.task }}</p>
+        <br />and when it's supposed to be done:
+        <p>{{taskform.date}}</p>
+      </div>
+      <button type="submit">Add new task</button>
+    </form>
+    <a href="/">Go back to the mainpage</a>
+  </body>
+</html>

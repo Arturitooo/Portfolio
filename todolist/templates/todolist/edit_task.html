@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit todo</title>
+    <title>Edit task</title>
   </head>
   <body>
-    <h1>Edit todo</h1>
+    <h1>Edit task</h1>
     <form method="post">
       {% csrf_token %}
 
       <div class="form-group">
         <p>Explain what you're supposed to do:</p>
-        <p>{{ form.todopoint }}</p>
+        <p>{{ taskform.task }}</p>
         <br />and when it's supposed to be done:
-        <p>{{form.date}}</p>
+        <p>{{ taskform.date}}</p>
       </div>
 
       <button type="submit">Save Changes</button>
     </form>
-    <a href="{% url 'my_todos_list' %}">Cancel</a>
+    <a href="{% url 'my_todo_lists' %}">Cancel</a>
   </body>
 </html>
