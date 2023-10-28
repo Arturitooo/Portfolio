@@ -31,16 +31,17 @@ ALLOWED_HOSTS = ["139.177.178.27", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    "seotool.apps.SeotoolConfig",
-    "general.apps.GeneralConfig",
-    "quotes.apps.QuotesConfig",
-    "todolist.apps.TodolistConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "general.apps.GeneralConfig",
+    "todolist.apps.TodolistConfig",
+    "quotes.apps.QuotesConfig",
+    "seotool.apps.SeotoolConfig",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,10 @@ AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "mainpage"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+}

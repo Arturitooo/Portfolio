@@ -1,11 +1,43 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+
+  <style>
+    #spinner {
+      animation: spin 1s linear infinite;
+      color: red;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .inline {
+      display: flex;
+    }
+    .spinner i {
+      margin-top: 10px;
+      margin-left: 50px;
+    }
+  </style>
+</head>
+
 THE QUOTE:<br /><br />
 
 <center>
-  <h2>{{data.content}}</h2>
-  <i>{{data.originator.name}} </i>
+  <h2>{{content}}</h2>
+  <i>{{author}} </i>
   <br /><br /><br />
   <button onClick="window.location.reload();">Generate new quote</button>
 </center>
+
+<div class="inline">
+  <p class="spinner" id="spinner"><i class="fa fa-spinner fa-5x"></i></p>
+</div>
+
 <br />
 <br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>
