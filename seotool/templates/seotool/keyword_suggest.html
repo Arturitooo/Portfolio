@@ -1,0 +1,19 @@
+<h1>Find new ideas for keywords!</h1>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Search</button>
+</form>
+{% if keyword %}
+<h2>Check out results for your keyword: <b>{{keyword}}</b></h2>
+{% endif %}
+<br />
+
+<ul>
+  {% for record in records %}
+  <li>{{record}}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'seotool' %}">Back to seotool</a><br />
+<a href="{% url 'mainpage' %}">Back to mainpage</a>

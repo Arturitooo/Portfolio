@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,6 +136,12 @@ AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "mainpage"
+
+config_file = os.path.join(BASE_DIR, "settings.ini")
+
+DEBUG = config("DEBUG", default=False, cast=bool)
+X_RapidAPI_Key = config("X_RapidAPI_Key")
+X_RapidAPI_Host = config("X_RapidAPI_Host")
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
