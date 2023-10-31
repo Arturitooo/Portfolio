@@ -1,19 +1,35 @@
-<h1>Find new ideas for keywords!</h1>
+<h1>SEOTOOL</h1>
 
 <form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Search</button>
+  {% csrf_token %} {{ KeywordForm.as_p }}
+  <button type="submit" name="kw_suggestions">KW suggestions</button>
 </form>
-{% if keyword %}
-<h2>Check out results for your keyword: <b>{{keyword}}</b></h2>
+{% if keyword and not generated_article %}
+<h2>Here's your keyword: <b>{{keyword}}</b></h2>
 {% endif %}
 <br />
 
 <ul>
   {% for record in records %}
-  <li>{{record}}</li>
+  <li><p>
+    <b>{{record}}</b>
+    <form method="post">
+      {% csrf_token %} <input type="hidden" name="keyword" value="{{ record }}">
+      <button type="submit" name="kw_suggestions">KW suggestions</button>
+    </form>
+    <form method="post">
+      {% csrf_token %} <input type="hidden" name="phrase" value="{{ record }}">{{ GenerateArticleForm.article_length }} {{ GenerateArticleForm.other_remarks }}
+      <button type="submit" name="generate_article">Generate article</button>
+    </form></p>
+  </li>
   {% endfor %}
 </ul>
+
+{% if generated_article %}<h2>Here's your article about: {{keyword}}</h2><br/>
+<p>{{generated_article}}</p>
+{% endif %}
+<br />
+
 
 <a href="{% url 'seotool' %}">Back to seotool</a><br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>

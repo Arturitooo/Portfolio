@@ -142,6 +142,7 @@ config_file = os.path.join(BASE_DIR, "settings.ini")
 DEBUG = config("DEBUG", default=False, cast=bool)
 X_RapidAPI_Key = config("X_RapidAPI_Key")
 X_RapidAPI_Host = config("X_RapidAPI_Host")
+OPENAI_API_KEY = config("OPENAI_API_KEY")
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
