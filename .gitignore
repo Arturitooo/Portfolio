@@ -1,5 +1,0 @@
-settings.ini
-*.pyc
-node_modules
-package-lock.json
-package.json
