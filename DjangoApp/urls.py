@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -22,4 +23,5 @@ urlpatterns = [
     path("to-do-list/", include("todolist.urls")),
     path("quotes/", include("quotes.urls")),
     path("seotool/", include("seotool.urls")),
+    path("react/", TemplateView.as_view(template_name='index.html'))
 ]
