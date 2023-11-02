@@ -6,9 +6,8 @@
 </form>
 {% if keyword and not generated_article %}
 <h2>Here's your keyword: <b>{{keyword}}</b></h2>
+<h3>Suggested keywords:</h3>
 {% endif %}
-<br />
-
 <ul>
   {% for record in records %}
   <li><p>

@@ -2,7 +2,9 @@ import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import KeywordForm, GenerateArticleForm
+from .models import Keywords_suggestion
 from decouple import config
+from django.utils import timezone
 import os
 import openai
 
@@ -39,9 +41,20 @@ def keyword_suggestions(request):
                     "records": response.json()["result"],
                     "KeywordForm": KeywordForm,
                     "GenerateArticleForm": GenerateArticleForm,
-                    "keyword": keyword.capitalize(),
+                    "keyword": keyword,
                 }
-                return render(request, "seotool/keyword_suggest.html", context)
+
+            merged_kw_suggested = ""
+            for kw_suggested_item in response.json()["result"]:
+                merged_kw_suggested += kw_suggested_item + "||"
+            keywords_suggestion = Keywords_suggestion(
+                base_keyword=keyword,
+                keywords_suggested=merged_kw_suggested,
+                publication_date=timezone.now(),
+            )
+            keywords_suggestion.save()
+
+            return render(request, "seotool/keyword_suggest.html", context)
 
         elif "generate_article" in request.POST:
             form = GenerateArticleForm(request.POST)
@@ -69,7 +82,4 @@ def keyword_suggestions(request):
                     "generated_article": generated_article,
                 }
                 return render(request, "seotool/keyword_suggest.html", context)
-    else:
-        form = KeywordForm()
-
     return render(request, "seotool/keyword_suggest.html", {"KeywordForm": KeywordForm})
