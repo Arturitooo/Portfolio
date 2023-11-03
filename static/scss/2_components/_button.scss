@@ -1,0 +1,67 @@
+.button {
+    width: max-content;
+    padding: 5px 5px;
+    border-radius: 24px;
+    mask-image: paint(smooth-corners);
+    -webkit-mask-image: paint(smooth-corners);
+    
+    .button--bg {
+        padding: 9px 15px;
+        background-color: $primary-dark;
+        border-radius: 24px;
+        box-shadow: inset 5px 5px 15px 0px rgba(255,255,255,.05);
+        mask-image: paint(smooth-corners);
+        -webkit-mask-image: paint(smooth-corners);
+
+        &:hover {
+            box-shadow: inset -3px -5px 15px 0px rgba(255,255,255,.05);
+            transition: 2px;
+        }
+
+        a {
+            font-size: $accent-size;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+    }
+
+    &.btn-g-blue {
+        background: linear-gradient(135deg, $g-blue-top, $g-blue-bottom);
+        
+        a {
+            background: linear-gradient(135deg, $g-blue-top, $g-blue-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }   
+    }
+
+    &.btn-g-purple {
+        background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-purple-top, $g-purple-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &.btn-g-yellow {
+        background: linear-gradient(135deg, $g-yellow-top, $g-yellow-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-yellow-top, $g-yellow-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &.btn-g-pink {
+        background: linear-gradient(135deg, $g-pink-top, $g-pink-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-pink-top, $g-pink-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}

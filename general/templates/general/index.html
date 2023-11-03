@@ -4,8 +4,8 @@
     {% if user.is_authenticated %} Hello <b>{{user.username}}</b> - you can logout
       <a href="{% url 'logout' %}">here</a>
       {% else %}
-      <a href="{% url 'register' %}">You can register here</a> <br />
-      <a href="{% url 'login' %}">You can login here</a>
+      <div class="button btn-g-blue"><div class="button--bg"><a href="{% url 'register' %}">Sign up</a></div></div><br/>
+      <div class="button btn-g-yellow"><div class="button--bg"><a href="{% url 'login' %}">Login</a></div></div><br/>
     {% endif %} <br />
 
     Here's the full list of apps I've created:

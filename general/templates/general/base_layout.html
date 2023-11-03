@@ -7,5 +7,8 @@
   </head>
   <body>
   {% block content %}{% endblock %}
+  <script>
+    if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
+  </script>
   </body>
 </html>
