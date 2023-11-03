@@ -1,5 +1,5 @@
 import requests
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import KeywordForm, GenerateArticleForm
 from .models import Keywords_suggestion
@@ -28,6 +28,16 @@ def keyword_suggestions(request):
         "X-RapidAPI-Host": x_rapidAPI_host,
     }
 
+    history_kw_suggestions = Keywords_suggestion.objects.filter(author=request.user)
+    history_kw_suggestions = history_kw_suggestions.order_by("-pk")[:5]
+
+    base_keywords = [
+        history_kw_suggestion.base_keyword
+        for history_kw_suggestion in history_kw_suggestions
+    ]
+
+    context = {"base_keywords": history_kw_suggestions, "KeywordForm": KeywordForm}
+
     if request.method == "POST":
         if "kw_suggestions" in request.POST:
             form = KeywordForm(request.POST)
@@ -38,8 +48,9 @@ def keyword_suggestions(request):
                 response = requests.get(url, headers=headers, params=querystring)
 
                 context = {
-                    "records": response.json()["result"],
+                    "base_keywords": history_kw_suggestions,
                     "KeywordForm": KeywordForm,
+                    "records": response.json()["result"],
                     "GenerateArticleForm": GenerateArticleForm,
                     "keyword": keyword,
                 }
@@ -47,8 +58,10 @@ def keyword_suggestions(request):
             merged_kw_suggested = ""
             for kw_suggested_item in response.json()["result"]:
                 merged_kw_suggested += kw_suggested_item + "||"
+
             keywords_suggestion = Keywords_suggestion(
                 base_keyword=keyword,
+                author=request.user,
                 keywords_suggested=merged_kw_suggested,
                 publication_date=timezone.now(),
             )
@@ -77,9 +90,30 @@ def keyword_suggestions(request):
                 )
                 generated_article = completion.choices[0].message["content"]
                 context = {
+                    "base_keywords": history_kw_suggestions,
                     "KeywordForm": KeywordForm,
                     "keyword": phrase.capitalize(),
                     "generated_article": generated_article,
                 }
                 return render(request, "seotool/keyword_suggest.html", context)
-    return render(request, "seotool/keyword_suggest.html", {"KeywordForm": KeywordForm})
+
+    return render(
+        request,
+        "seotool/keyword_suggest.html",
+        context,
+    )
+
+
+@login_required
+def keyword_suggestions_history(request, pk):
+    keywords_suggestion = get_object_or_404(Keywords_suggestion, pk=pk)
+    base_keyword = keywords_suggestion.base_keyword
+    keywords_suggested_merged = keywords_suggestion.keywords_suggested
+    keywords_suggested = keywords_suggested_merged.split("||")
+    keywords_suggested = keywords_suggested[:-1]
+
+    context = {
+        "base_keyword": base_keyword,
+        "keywords_suggested": keywords_suggested,
+    }
+    return render(request, "seotool/kw_history.html", context)
