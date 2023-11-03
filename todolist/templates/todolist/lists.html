@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>To do Lists</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block content %}
     <h1>Here's everything you have to do:</h1>
     <ul>
       {% for record in records %} {% if record.date == "ASAP!" %}
@@ -54,5 +50,4 @@
       <button type="submit">Add new task</button>
     </form>
     <a href="/">Go back to the mainpage</a>
-  </body>
-</html>
+ {% endblock %}

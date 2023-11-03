@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Registration</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
     <h1>Register</h1>
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
@@ -12,3 +9,4 @@
     <a href="{% url 'mainpage' %}">Back to mainpage</a>
   </body>
 </html>
+{% endblock %}

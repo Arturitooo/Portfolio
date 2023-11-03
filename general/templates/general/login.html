@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Login</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
     <h1>Login</h1>
     <form method="post">
       {% csrf_token %}
@@ -21,3 +18,4 @@
     <a href="{% url 'mainpage' %}">Back to mainpage</a>
   </body>
 </html>
+{% endblock %}
