@@ -1,0 +1,61 @@
+.portfolio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 200px);
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 30px;
+    // background: #b0b0b0;
+    padding: 10px;
+
+    a.portfolio__item-container {
+        // background: #a58f8f;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 40px 40px;
+        color: $primary-light;
+        text-decoration: none;
+        background-size: 100%;
+        background-position:center;
+        background-color: #000;
+
+        &:hover {
+            background-size: 101%;
+            transition: 0.3s ease-in-out;
+        }
+
+        h2,
+        h4 {
+            text-align: left;
+        }
+
+        &--seotool {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgb(0, 0, 0,.8) 81%), url('/static/images/seo-tool.webp');
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 4;
+        }
+
+        &--quotes {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgb(0, 0, 0,.8) 81%), url('/static/images/quotes.webp');
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+
+        &--todolist {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgb(0, 0, 0,.8) 81%), url('/static/images/todolist.webp');
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 4;
+        }
+
+    }
+}

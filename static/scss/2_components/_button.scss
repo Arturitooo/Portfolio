@@ -1,28 +1,30 @@
 .button {
     width: max-content;
-    padding: 5px 5px;
+    padding: 4px 4px;
     border-radius: 24px;
     mask-image: paint(smooth-corners);
     -webkit-mask-image: paint(smooth-corners);
     
+    &:hover {
+        transform: scale(0.95);
+        transition: 0.2s ease-out;
+    }
+    
     .button--bg {
-        padding: 9px 15px;
+        padding: 9px 0px;
         background-color: $primary-dark;
         border-radius: 24px;
-        box-shadow: inset 5px 5px 15px 0px rgba(255,255,255,.05);
         mask-image: paint(smooth-corners);
         -webkit-mask-image: paint(smooth-corners);
 
-        &:hover {
-            box-shadow: inset -3px -5px 15px 0px rgba(255,255,255,.05);
-            transition: 2px;
-        }
-
         a {
+            padding: 15px 15px;
             font-size: $accent-size;
             text-transform: uppercase;
             font-weight: 500;
+            text-decoration: none;
         }
+        
     }
 
     &.btn-g-blue {
@@ -35,21 +37,31 @@
         }   
     }
 
+    &.btn-g-yelpur {
+        background: linear-gradient(135deg, $g-yelpur-top, $g-yelpur-bottom);
+        
+        a {
+            background: linear-gradient(135deg, $g-yelpur-top, $g-yelpur-bottom);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }   
+    }
+
     &.btn-g-purple {
         background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
 
         a {
-            background: linear-gradient(135deg, $g-purple-top, $g-purple-middle);
+            background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     }
 
-    &.btn-g-yellow {
-        background: linear-gradient(135deg, $g-yellow-top, $g-yellow-bottom);
+    &.btn-g-orange {
+        background: linear-gradient(135deg, $g-orange-top, $g-orange-bottom);
 
         a {
-            background: linear-gradient(135deg, $g-yellow-top, $g-yellow-middle);
+            background: linear-gradient(135deg, $g-orange-top, $g-orange-middle);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }

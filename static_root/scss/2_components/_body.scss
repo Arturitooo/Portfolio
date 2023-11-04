@@ -1,0 +1,64 @@
+body {
+    background-color: $primary-dark;
+    color:$primary-light;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 0;
+    margin: 0;
+        
+    .body-gradient {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 80%;
+        opacity: 0.6;
+    }
+
+    main {
+        position: relative;
+        top: 64px;
+        left: 0;
+        padding-top: 70px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-align: center;
+        text-decoration: none;
+        line-height: 1.25em;
+        margin: 0.35em 0;
+        color: $primary-light;
+    }
+
+    h1 {
+        font-size: $big-heading-size;
+    }
+
+    h2 {
+        font-size: $heading-size;
+    }
+
+    h3 {
+        font-size: $subheading-size;
+        font-weight: 300;
+    }
+
+    h4 {
+        font-size: $small-heading-size;
+        font-weight: 300;
+    }
+
+    span, p {
+        font-size: $text-size;
+    }
+
+    small {
+        font-size: $small-size;
+    }
+
+    a {
+        color: $primary-light;
+        text-decoration-color: $g-yelpur-top;
+    }                               
+}

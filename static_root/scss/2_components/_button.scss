@@ -1,0 +1,78 @@
+.button {
+    width: max-content;
+    padding: 4px 4px;
+    border-radius: 24px;
+    mask-image: paint(smooth-corners);
+    -webkit-mask-image: paint(smooth-corners);
+    
+    &:hover {
+        transform: scale(0.95);
+        transition: 0.2s ease-out;
+    }
+    
+    .button--bg {
+        padding: 9px 0px;
+        background-color: $primary-dark;
+        border-radius: 24px;
+        mask-image: paint(smooth-corners);
+        -webkit-mask-image: paint(smooth-corners);
+
+        a {
+            padding: 15px 15px;
+            font-size: $accent-size;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+    }
+
+    &.btn-g-blue {
+        background: linear-gradient(135deg, $g-blue-top, $g-blue-bottom);
+        
+        a {
+            background: linear-gradient(135deg, $g-blue-top, $g-blue-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }   
+    }
+
+    &.btn-g-yelpur {
+        background: linear-gradient(135deg, $g-yelpur-top, $g-yelpur-bottom);
+        
+        a {
+            background: linear-gradient(135deg, $g-yelpur-top, $g-yelpur-bottom);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }   
+    }
+
+    &.btn-g-purple {
+        background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &.btn-g-orange {
+        background: linear-gradient(135deg, $g-orange-top, $g-orange-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-orange-top, $g-orange-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &.btn-g-pink {
+        background: linear-gradient(135deg, $g-pink-top, $g-pink-bottom);
+
+        a {
+            background: linear-gradient(135deg, $g-pink-top, $g-pink-middle);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}
