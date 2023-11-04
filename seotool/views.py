@@ -107,13 +107,10 @@ def keyword_suggestions(request):
 @login_required
 def keyword_suggestions_history(request, pk):
     keywords_suggestion = get_object_or_404(Keywords_suggestion, pk=pk)
-    base_keyword = keywords_suggestion.base_keyword
-    keywords_suggested_merged = keywords_suggestion.keywords_suggested
-    keywords_suggested = keywords_suggested_merged.split("||")
-    keywords_suggested = keywords_suggested[:-1]
+    keywords_suggested = keywords_suggestion.keywords_suggested.rstrip("||").split("||")
 
     context = {
-        "base_keyword": base_keyword,
+        "base_keyword": keywords_suggestion.base_keyword,
         "keywords_suggested": keywords_suggested,
     }
     return render(request, "seotool/kw_history.html", context)

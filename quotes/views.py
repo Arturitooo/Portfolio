@@ -2,6 +2,8 @@ import requests
 import time
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .forms import Favourite_quoteForm
+from .models import Favourite_quote
 
 
 # Create your views here.
@@ -21,9 +23,21 @@ def quote(request):
         content = data["content"]
         author = data["originator"]["name"]
         # timer added due to API limitations -
-        time.sleep(0.5)
-    print(content, author)
-    time.sleep(0.5)
+        time.sleep(0.25)
+    if request.method == "POST":
+        form = Favourite_quoteForm(request.POST)
+        if form.is_valid():
+            Favourite_quote.objects.create(user=request.user, quote=quote)
+
+        else:
+            form = Favourite_quoteForm()
+    time.sleep(0.25)
     return render(
-        request, "quotes/index.html", context={"content": content, "author": author}
+        request,
+        "quotes/index.html",
+        context={
+            "content": content,
+            "author": author,
+            "Favourite_quoteForm": Favourite_quoteForm,
+        },
     )

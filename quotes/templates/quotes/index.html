@@ -1,10 +1,16 @@
-THE QUOTE:<br /><br />
+<h2>THE QUOTE:</h2>
+<br />
 
 <center>
   <h2>{{content}}</h2>
   <i>{{author}} </i>
   <br /><br /><br />
-  <button onClick="window.location.reload();">Generate new quote</button>
+  <p><button onClick="window.location.reload();">Generate new quote</button></p>
+  <p><form method="post">
+    {% csrf_token %}<button type="submit" name="add_favourite">
+      Add to favourite
+    </button>
+  </form></p>
 </center>
 
 <br />
