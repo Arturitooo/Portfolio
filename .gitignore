@@ -1,6 +1,6 @@
 settings.ini
-*pyc
 db.sqlite3
+*pyc
 node_modules
 package-lock.json
 package.json
