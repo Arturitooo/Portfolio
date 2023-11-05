@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Edit task</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block title %}TODO Edit task{% endblock %}
+{% block content %}
     <h1>Edit task</h1>
     <form method="post">
       {% csrf_token %}
@@ -18,5 +15,4 @@
       <button type="submit">Save Changes</button>
     </form>
     <a href="{% url 'my_todo_lists' %}">Cancel</a>
-  </body>
-</html>
+{% endblock %}

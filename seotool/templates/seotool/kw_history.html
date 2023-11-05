@@ -1,3 +1,6 @@
+{% extends 'base_layout.html' %}
+{% block title %}SEO tool Keyword history{% endblock %}
+{% block content %}
 <h2>Here's your keyword: <b>{{base_keyword}}</b></h2>
 
 <a href="{% url 'keyword_suggestions' %}">Back to Keyword suggestions</a><br />
@@ -13,3 +16,4 @@
 
 <a href="{% url 'seotool' %}">Back to seotool</a><br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>
+{% endblock %}

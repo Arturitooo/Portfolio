@@ -1,3 +1,6 @@
+{% extends 'base_layout.html' %}
+{% block title %}SEO tool Keyword suggest{% endblock %}
+{% block content %}
 <h1>SEOTOOL</h1>
 
 <form method="post">
@@ -11,7 +14,6 @@
 <a href="{% url 'keyword_suggestions_history' pk=base_keyword.pk %}">{{base_keyword.base_keyword}}</a>&nbsp;
 {% endfor %}
 {% endif %}
-
 
 {% if keyword and not generated_article %}
 <h2>Here's your keyword: <b>{{keyword}}</b></h2>
@@ -38,6 +40,6 @@
 {% endif %}
 <br />
 
-
 <a href="{% url 'seotool' %}">Back to seotool</a><br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>
+{% endblock %}

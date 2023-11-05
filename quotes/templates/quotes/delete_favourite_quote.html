@@ -1,4 +1,6 @@
-<body>
+{% extends 'base_layout.html' %}
+{% block title %}Delete quote{% endblock %}
+{% block content %}
   <h1>Confirm deleting the quote</h1>
   <p>Are you sure you want to delete the quote?</p>
   <center>
@@ -9,4 +11,4 @@
     <button type="submit">Confirm</button>
   </form>
   <a href="{% url 'quote' %}">Cancel</a>
-</body>
+{% endblock %}

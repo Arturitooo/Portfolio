@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Simple SEO app</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block title %}SEO tool home{% endblock %}
+{% block content %}
     <h1>Here's what you can do:</h1>
     <ul>
       <li>
@@ -14,5 +11,4 @@
     </ul>
 
     <a href="{% url 'mainpage' %}">Back to mainpage</a>
-  </body>
-</html>
+{% endblock %}
