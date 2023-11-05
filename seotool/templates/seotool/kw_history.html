@@ -1,0 +1,15 @@
+<h2>Here's your keyword: <b>{{base_keyword}}</b></h2>
+
+<a href="{% url 'keyword_suggestions' %}">Back to Keyword suggestions</a><br />
+
+<h3>Suggested keywords:</h3>
+<ul>
+  {% for record in keywords_suggested %}
+  <li>
+    <b>{{record}}</b>
+  </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'seotool' %}">Back to seotool</a><br />
+<a href="{% url 'mainpage' %}">Back to mainpage</a>

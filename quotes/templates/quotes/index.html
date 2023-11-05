@@ -1,11 +1,31 @@
-THE QUOTE:<br /><br />
+<h2>THE QUOTE:</h2>
+<br />
 
 <center>
   <h2>{{content}}</h2>
   <i>{{author}} </i>
-  <br /><br /><br />
-  <button onClick="window.location.reload();">Generate new quote</button>
+  <br />
+  <p><form method="post">
+    {% csrf_token %}<button type="submit" name="add_favourite">
+      Add to favourite⭐
+      <input type="hidden" name="content" value="{{content}}">
+      <input type="hidden" name="author" value="{{author}}">
+    </button>
+  </form></p><br />
+  <p><button onClick="window.location.reload();">Generate new quote</button></p>
 </center>
+
+{% if list_favourite_quotes %}
+<h3>Here's list of your favourite quotes:</h3>
+<ul>
+  {% for favourite_quote in list_favourite_quotes %}
+  <li><b>{{favourite_quote.author}}</b>: <i>{{favourite_quote.quote}}</i> 
+    <a href="{% url 'delete_favourite_quote' favourite_quote.pk %}" style="text-decoration: none">❌</a></li> 
+  {% endfor %}
+</ul>
+{% endif %}
+
+
 
 <br />
 <br />

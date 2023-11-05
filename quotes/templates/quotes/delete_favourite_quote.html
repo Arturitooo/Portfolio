@@ -1,0 +1,12 @@
+<body>
+  <h1>Confirm deleting the quote</h1>
+  <p>Are you sure you want to delete the quote?</p>
+  <center>
+    <p>"<b>{{ favourite_quote.quote }}</b>"?</p>
+  </center>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+  <a href="{% url 'quote' %}">Cancel</a>
+</body>
