@@ -1,6 +1,9 @@
 # forms.py
 from django import forms
+from .models import Favourite_quote
 
 
 class Favourite_quoteForm(forms.ModelForm):
-    quote = forms.CharField(max_length=1500)
+    class Meta:
+        model = Favourite_quote
+        fields = ["user", "quote", "author"]
