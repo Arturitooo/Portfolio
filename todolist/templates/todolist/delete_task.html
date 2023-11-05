@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Task Deletion</title>
-  </head>
-  <body>
+{% extends 'base_layout.html' %}
+{% block title %}TODO Task deletion{% endblock %}
+{% block content %}
     <h1>Confirm deleting the task</h1>
     <p>Are you sure you want to delete the task? "<b>{{ record.task }}</b>"?</p>
     <form method="post">
@@ -11,5 +8,4 @@
       <button type="submit">Confirm</button>
     </form>
     <a href="{% url 'my_todo_lists' %}">Cancel</a>
-  </body>
-</html>
+{% endblock %}
