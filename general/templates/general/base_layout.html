@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <img class="body-gradient {% block background_class %}{% endblock %}" src="https://daily-now-res.cloudinary.com/image/upload/s--O8GDhJO8--/f_auto/v1692271285/public/Desktop-ask-bg" alt="Gradient background">
+    <header class="menu {% block header_class %}{% endblock %}">
+      {% if user.is_authenticated %}
+        Hello, {{user.username}}!
+        <div class="button btn-g-blue"><div class="button--bg"><a href="{% url 'logout' %}">Logout</a></div></div>
+      {% else %}
+      <div class="button btn-g-yelpur"><div class="button--bg"><a href="{% url 'register' %}">Sign up</a></div></div>
+      <div class="button btn-g-yelpur"><div class="button--bg"><a href="{% url 'login' %}">Login</a></div></div>
+      {% endif %}
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <script>
+      if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
+    </script>
+  </body>
+</html>

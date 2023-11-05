@@ -1,0 +1,16 @@
+header {
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 20px;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 200px);
+    padding: 10px 100px;
+    background: $primary-dark;
+
+    &.no-menu {
+        display:none;
+    }
+}

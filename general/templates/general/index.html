@@ -1,25 +1,29 @@
-{% if user.is_authenticated %} Hello <b>{{user.username}}</b> - you can logout
-<a href="{% url 'logout' %}">here</a>
-{% else %}
-<a href="{% url 'register' %}">You can register here</a> <br />
-<a href="{% url 'login' %}">You can login here</a>
-{% endif %} <br />
+{% extends 'base_layout.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h3>Artur's portfolio</h3>
+    <h1>Full list of apps I've created</h1>
+    <section class="portfolio">
+      <a href="seotool/" class="portfolio__item-container portfolio__item-container--seotool">
+        <div class="portfolio__item">
+          <h2>Simple SEO tool</h2>
+          <h4>Multiple external RestAPI usage</h4>
+        </div>
+      </a>
+      <a href="quotes/" class="portfolio__item-container portfolio__item-container--quotes">
+        <div class="portfolio__item portfolio__item">
+          <h2>Quotes generator</h2>
+          <h4>External RestAPI usage - GET / POST</h4>
+        </div>
+      </a>
+      <a href="to-do-list/" class="portfolio__item-container portfolio__item-container--todolist">
+        <div class="portfolio__item portfolio__item">
+          <h2>TODO list</h2>
+          <h4>Simple CRUD</h4>
+        </div>
+      </a>
+    </section>
+    </ul>
+{% endblock %}
 
-Here's the full list of apps I've created:
-<ul>
-  <li>
-    <a href="seotool/"><b>Simple SEO tool</b></a
-    ><br />
-    <i>Multiple external RestAPI usage</i>
-  </li>
-  <li>
-    <a href="quotes/"><b>Quotes generator</b></a
-    ><br />
-    <i>External RestAPI usage - GET / POST</i>
-  </li>
-  <li>
-    <a href="to-do-list/"><b>To do list</b></a
-    ><br />
-    <i>Simple CRUD</i>
-  </li>
-</ul>
+
