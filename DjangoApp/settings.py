@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     "todolist.apps.TodolistConfig",
     "quotes.apps.QuotesConfig",
     "seotool.apps.SeotoolConfig",
+    "recipes.apps.RecipesConfig",
+
 ]
 
 MIDDLEWARE = [
@@ -159,3 +161,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ),
 }
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')

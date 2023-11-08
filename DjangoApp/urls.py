@@ -22,4 +22,5 @@ urlpatterns = [
     path("to-do-list/", include("todolist.urls")),
     path("quotes/", include("quotes.urls")),
     path("seotool/", include("seotool.urls")),
+    path("recipes/", include("recipes.urls"))
 ]
