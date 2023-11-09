@@ -139,6 +139,10 @@ header.no-menu {
   display: none;
 }
 
+input {
+  background-color: #00ff00;
+}
+
 .portfolio {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -170,26 +174,33 @@ header.no-menu {
 .portfolio a.portfolio__item-container h4 {
   text-align: left;
 }
+.portfolio a.portfolio__item-container--recipes {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/seo-tool.webp");
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
 .portfolio a.portfolio__item-container--seotool {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/seo-tool.webp");
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 5;
 }
 .portfolio a.portfolio__item-container--quotes {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/quotes.webp");
   grid-column-start: 2;
   grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 .portfolio a.portfolio__item-container--todolist {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/todolist.webp");
   grid-column-start: 2;
   grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 5;
 }
 
 /*# sourceMappingURL=style.css.map */
