@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %} 
+{% block title %} Congratulations {%endblock%} 
+{% block content %}
+<h3>Add ingredient to your recipe: {{recipe.recipe_name}}</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ ingredient_form.as_p }}
+    <button type="submit">Add ingredient</button>
+</form>
+<br />
+<br />
+<a href="{% url 'recipes' %}">Back to recipes page</a>
+<a href="{% url 'mainpage' %}">Back to mainpage</a>
+
+{% endblock %}
