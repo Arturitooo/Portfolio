@@ -175,7 +175,7 @@ input {
   text-align: left;
 }
 .portfolio a.portfolio__item-container--recipes {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/seo-tool.webp");
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/recipes.webp");
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
