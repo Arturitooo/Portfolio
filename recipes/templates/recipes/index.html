@@ -1,6 +1,12 @@
-{% extends 'base_layout.html' %}
-{% block title %}Home{% endblock %}
+{% extends 'base_layout.html' %} 
+{% block title %} Main Recipes page {%endblock%} 
 {% block content %}
 <h3>The page with recipes!</h3>
+
+
+
+<br />
+<br />
+<a href="{% url 'mainpage' %}">Back to mainpage</a>
 
 {% endblock %}
