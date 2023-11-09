@@ -22,6 +22,7 @@ def add_recipe(request):
             recipe.recipe_author = request.user
             recipe.save()
             return redirect("recipes/add_ingredients", recipe_id=recipe.id)
+
     else:
         recipe_form = RecipeForm()
 
@@ -46,6 +47,30 @@ def add_ingredients(request, recipe_id):
         "recipes/add_ingredients.html",
         {"ingredient_form": ingredient_form, "recipe": recipe},
     )
+
+
+def add_instructions(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+
+    if request.method == "POST":
+        instruction_form = InstructionForm(request.POST)
+        if instruction_form.is_valid():
+            instruction = instruction_form.save(commit=False)
+            instruction.recipe = recipe
+            instruction.save()
+            return redirect("add_instructions", recipe_id=recipe.id)
+    else:
+        instruction_form = InstructionForm()
+
+    return render(
+        request,
+        "add_instructions.html",
+        {"instruction_form": instruction_form, "recipe": recipe},
+    )
+
+
+# i need to differentiate when to go from step 2 to step 3 and when to ad one more items
+# i need to differentiate when to go from step 3 to step thx page and when to ad one more items
 
 
 def added_recipe(request):
