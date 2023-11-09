@@ -33,28 +33,36 @@
             text-align: left;
         }
 
+        &--recipes {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgb(0, 0, 0,.8) 81%), url('/static/images/seo-tool.webp');
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+
         &--seotool {
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgb(0, 0, 0,.8) 81%), url('/static/images/seo-tool.webp');
             grid-column-start: 1;
             grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 4;
+            grid-row-start: 2;
+            grid-row-end: 5;
         }
 
         &--quotes {
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgb(0, 0, 0,.8) 81%), url('/static/images/quotes.webp');
             grid-column-start: 2;
             grid-column-end: 3;
-            grid-row-start: 1;
-            grid-row-end: 2;
+            grid-row-start: 2;
+            grid-row-end: 3;
         }
 
         &--todolist {
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 40%, rgb(0, 0, 0,.8) 81%), url('/static/images/todolist.webp');
             grid-column-start: 2;
             grid-column-end: 3;
-            grid-row-start: 2;
-            grid-row-end: 4;
+            grid-row-start: 3;
+            grid-row-end: 5;
         }
 
     }
