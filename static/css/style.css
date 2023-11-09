@@ -69,6 +69,7 @@ body a {
   transform: scale(0.95);
   transition: 0.2s ease-out;
 }
+.button .ahref--bg,
 .button .button--bg {
   padding: 9px 0px;
   background-color: #0B0B0B;
@@ -76,17 +77,33 @@ body a {
   mask-image: paint(smooth-corners);
   -webkit-mask-image: paint(smooth-corners);
 }
-.button .button--bg a {
+.button .ahref--bg.button--bg,
+.button .button--bg.button--bg {
+  padding: 0px;
+}
+.button .ahref--bg a,
+.button .ahref--bg button,
+.button .button--bg a,
+.button .button--bg button {
   padding: 15px 15px;
   font-size: 15px;
   text-transform: uppercase;
   font-weight: 500;
   text-decoration: none;
 }
+.button .ahref--bg button,
+.button .button--bg button {
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  outline: none;
+  padding: 9px 15px;
+  cursor: pointer;
+}
 .button.btn-g-blue {
   background: linear-gradient(135deg, #00ff95, #0f00e3);
 }
-.button.btn-g-blue a {
+.button.btn-g-blue a,
+.button.btn-g-blue button {
   background: linear-gradient(135deg, #00ff95, #0B59FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -94,7 +111,8 @@ body a {
 .button.btn-g-yelpur {
   background: linear-gradient(135deg, #ff9d00, #2D27FF);
 }
-.button.btn-g-yelpur a {
+.button.btn-g-yelpur a,
+.button.btn-g-yelpur button {
   background: linear-gradient(135deg, #ff9d00, #2D27FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -102,26 +120,64 @@ body a {
 .button.btn-g-purple {
   background: linear-gradient(135deg, #FF005B, #2D27FF);
 }
-.button.btn-g-purple a {
+.button.btn-g-purple a,
+.button.btn-g-purple button {
   background: linear-gradient(135deg, #FF005B, #2D27FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.button.btn-g-orange {
-  background: linear-gradient(135deg, #FFE53B, #FF2525);
+
+.link,
+.link-left,
+.link-right {
+  text-decoration: none;
+  opacity: 0.7;
+  font-size: 15px;
+  padding: 7px 0;
 }
-.button.btn-g-orange a {
-  background: linear-gradient(135deg, #FFE53B, #FF702E);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.link.back-link,
+.link-left.back-link,
+.link-right.back-link {
+  align-self: flex-start;
 }
-.button.btn-g-pink {
-  background: linear-gradient(135deg, #FF005B, #ff4d00);
+.link.link:hover,
+.link-left.link:hover,
+.link-right.link:hover {
+  opacity: 0.9;
 }
-.button.btn-g-pink a {
-  background: linear-gradient(135deg, #FF005B, #FF3023);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.link.link-left:hover,
+.link-left.link-left:hover,
+.link-right.link-left:hover {
+  opacity: 0.9;
+  transform: translateX(-3px);
+  transition: 0.2s ease-out;
+}
+.link.link-right:hover,
+.link-left.link-right:hover,
+.link-right.link-right:hover {
+  opacity: 0.9;
+  transform: translateX(3px);
+  transition: 0.2s ease-out;
+}
+
+.link-blue {
+  color: #0B59FF;
+}
+
+.link-green {
+  color: #00ff95;
+}
+
+.link-pink {
+  color: #FF005B;
+}
+
+.link-purple {
+  color: #8E15B4;
+}
+
+.link-orange {
+  color: #ff9d00;
 }
 
 header {
@@ -139,8 +195,55 @@ header.no-menu {
   display: none;
 }
 
+input,
+input:active,
+input:focus,
+input:focus-visible,
+input:target,
+input:-webkit-autofill:focus,
+input:-webkit-autofill {
+  background-color: #0B0B0B;
+  color: #EEE;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  line-height: 40px;
+  font-size: 15px;
+  padding: 0 10px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+input:-internal-autofill-selected {
+  background-color: #0B0B0B !important;
+  -webkit-text-fill-color: #EEE;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #0B0B0B inset;
+}
+
 input {
-  background-color: #00ff00;
+  min-width: 300px;
+}
+input :focus {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+input ::placeholder {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.login-page__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 40px;
+  width: 320px;
+  margin: 0 auto;
+}
+
+.login-page__container .button {
+  margin: 0 auto;
 }
 
 .portfolio {
@@ -175,7 +278,7 @@ input {
   text-align: left;
 }
 .portfolio a.portfolio__item-container--recipes {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/seo-tool.webp");
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 54%, rgba(0, 0, 0, 0.8) 81%), url("/static/images/recipes.webp");
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;

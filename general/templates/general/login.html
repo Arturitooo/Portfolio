@@ -4,20 +4,22 @@
 {% block header_class %}no-menu{% endblock %}
 {% block content %}
     <h1>Login</h1>
-    <form method="post">
-      {% csrf_token %}
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required /><br /><br />
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-      /><br /><br />
-      <button type="submit">Login</button>
-    </form>
-    <a href="{% url 'mainpage' %}">Back to mainpage</a>
+    <section class="login-page__container">
+    <a href="{% url 'mainpage' %}" class="link-left back-link link-purple">⬅ Home</a>
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" required placeholder="Username"/><br /><br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="Password"
+        /><br /><br />
+        <div class="button btn-g-purple"><div class="button--bg"><button type="submit">Login</button></div></div>        
+      </form>
+      <a href="{% url 'register' %}" class="link link-pink">Create an account</a>
+    </section>
   </body>
 </html>
 {% endblock %}
