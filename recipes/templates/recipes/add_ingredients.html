@@ -1,12 +1,17 @@
-{% extends 'base_layout.html' %} 
-{% block title %} Congratulations {%endblock%} 
+{% extends 'base_layout.html' %} {% block title %} Congratulations {%endblock%}
 {% block content %}
 <h3>Add ingredient to your recipe: {{recipe.recipe_name}}</h3>
 <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ ingredient_form.as_p }}
-    <button type="submit">Add ingredient</button>
+  {% csrf_token %} {{ ingredient_form.as_p }}
+  <button type="submit" name="add_ingredient">Add ingredient</button>
 </form>
+
+{% if recipe.id %}
+<a href="{% url 'add_instructions' recipe_id=recipe.id %}">
+  <button name="go_to_instructions">Next step</button>
+</a>
+{% endif %}
+
 <br />
 <br />
 <a href="{% url 'recipes' %}">Back to recipes page</a>

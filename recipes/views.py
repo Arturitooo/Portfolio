@@ -21,7 +21,7 @@ def add_recipe(request):
             recipe = recipe_form.save(commit=False)
             recipe.recipe_author = request.user
             recipe.save()
-            return redirect("recipes/add_ingredients", recipe_id=recipe.id)
+            return redirect("add_ingredients", recipe_id=recipe.id)
 
     else:
         recipe_form = RecipeForm()
@@ -38,7 +38,7 @@ def add_ingredients(request, recipe_id):
             ingredient = ingredient_form.save(commit=False)
             ingredient.recipe = recipe
             ingredient.save()
-            return redirect("recipes/add_ingredients", recipe_id=recipe.id)
+            return redirect("add_ingredients", recipe_id=recipe.id)
     else:
         ingredient_form = IngredientForm()
 
@@ -64,7 +64,7 @@ def add_instructions(request, recipe_id):
 
     return render(
         request,
-        "add_instructions.html",
+        "recipes/add_instructions.html",
         {"instruction_form": instruction_form, "recipe": recipe},
     )
 
