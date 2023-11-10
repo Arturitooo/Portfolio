@@ -1,3 +1,38 @@
-input {
-  background-color: #00ff00;
+input,
+input:active,
+input:focus,
+input:focus-visible,
+input:target,
+input:-webkit-autofill:focus,
+input:-webkit-autofill {
+  background-color: $primary-dark;
+  color: $primary-light;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $input-border;
+  line-height: 40px;
+  font-size: $text-size;
+  padding: 0 10px;
+  font-family: 'Ubuntu', sans-serif;
 }
+
+input:-internal-autofill-selected {
+  background-color: $primary-dark!important;
+  -webkit-text-fill-color: $primary-light;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px $primary-dark inset;
+}
+
+input {
+  min-width: 300px;
+
+  :focus {
+    border-bottom: 1px solid $input-border-active;
+  }
+  ::placeholder {
+    font-size: $text-size;
+    color: $placeholder-text; 
+  }
+}
+
