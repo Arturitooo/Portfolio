@@ -2,15 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 CUISINE_COUNTRIES = [
-    ("Polish", "🇵🇱"),
-    ("German", "🇩🇪"),
-    ("Italian", "🇮🇹"),
-    ("French", "🇫🇷"),
-    ("American", "🇺🇸"),
-    ("Spanish", "🇪🇸"),
-    ("Japanese", "🇯🇵"),
-    ("Indian", "🇮🇳"),
-    ("Other", ""),
+    ("🇵🇱", "Polish"),
+    ("🇩🇪", "German"),
+    ("🇮🇹Italian", "Italian"),
+    ("🇫🇷French", "French"),
+    ("🇺🇸American", "American"),
+    ("🇪🇸Spanish", "Spanish"),
+    ("🇯🇵Japanese", "Japan"),
+    ("🇮🇳Indian", "Indian"),
+    ("Other", "Other"),
 ]
 
 MEALS = [
