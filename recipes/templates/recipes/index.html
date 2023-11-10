@@ -13,13 +13,15 @@
 <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
 <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
 
+<img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.recipe_name }}">
+
+
 <h3>Ingredients:</h3>
 <ul>
   {% for ingredient in recipe.ingredient_set.all %}
   <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }}</li>
   {% endfor %}
-</ul>
-
+  
 <h3>Instructions:</h3>
 <ol>
   {% for instruction in recipe.instruction_set.all %}

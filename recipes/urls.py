@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import recipes, add_recipe, add_ingredients, added_recipe, add_instructions
 
 urlpatterns = [
@@ -10,3 +12,6 @@ urlpatterns = [
     ),
     path("add/success", added_recipe, name="added_recipe"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

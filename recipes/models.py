@@ -28,7 +28,7 @@ class Recipe(models.Model):
     time_consumption = models.IntegerField()  # hours - 1,5 should give user 1h30min
     cuisine = models.CharField(choices=CUISINE_COUNTRIES, max_length=50)
     meal_type = models.CharField(choices=MEALS, max_length=50)
-    recipe_image = models.ImageField(upload_to="uploads/recipes")
+    recipe_image = models.ImageField(upload_to="recipes/")
 
     def __str__(self):
         return f"{self.recipe_author} - {self.recipe_name} - {self.pk}"
