@@ -1,18 +1,18 @@
-{% extends 'base_layout.html' %}
-{% block title %}TODO Edit task{% endblock %}
+{% extends 'base_layout.html' %} {% block title %}TODO Edit task{% endblock %}
 {% block content %}
-    <h1>Edit task</h1>
-    <form method="post">
-      {% csrf_token %}
+<h1>Edit task</h1>
+<form method="post">
+  {% csrf_token %}
 
-      <div class="form-group">
-        <p>Explain what you're supposed to do:</p>
-        <p>{{ taskform.task }}</p>
-        <br />and when it's supposed to be done:
-        <p>{{ taskform.date}}</p>
-      </div>
+  <div class="form-group">
+    <p>Explain what you're supposed to do:</p>
+    <p>{{ taskform.task }}</p>
+    <br />and when it's supposed to be done:
+    <p>{{ taskform.date}}</p>
+  </div>
 
-      <button type="submit">Save Changes</button>
-    </form>
-    <a href="{% url 'my_todo_lists' %}">Cancel</a>
+  <button type="submit">Save Changes</button>
+</form>
+<br />
+<a href="{% url 'my_todo_lists' %}">Cancel</a>
 {% endblock %}

@@ -5,13 +5,16 @@ from .models import Recipe
 
 # Create your views here.
 def recipes(request):
+
+    recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
+
     # search
     # list of recipes
     # recipe details page
     # add to favourite
     # comment recipe
     # rate recipe
-    return render(request, "recipes/index.html")
+    return render(request, "recipes/index.html", {'recipes': recipes})
 
 
 def add_recipe(request):
