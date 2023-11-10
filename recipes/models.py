@@ -1,15 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 CUISINE_COUNTRIES = [
-    ("🇵🇱", "Polish"),
-    ("🇩🇪", "German"),
-    ("🇮🇹Italian", "Italian"),
-    ("🇫🇷French", "French"),
-    ("🇺🇸American", "American"),
-    ("🇪🇸Spanish", "Spanish"),
-    ("🇯🇵Japanese", "Japan"),
-    ("🇮🇳Indian", "Indian"),
+    ("Polish;", "Polish"),
+    ("German", "German"),
+    ("Italian", "Italian"),
+    ("French", "French"),
+    ("American", "American"),
+    ("Spanish", "Spanish"),
+    ("Japanese", "Japan"),
+    ("Indian", "Indian"),
     ("Other", "Other"),
 ]
 
@@ -50,3 +52,8 @@ class Instruction(models.Model):
 
     def __str__(self):
         return f"{self.recipe} - {self.step_number}"
+
+@receiver(pre_delete, sender=Recipe)
+def delete_recipe(sender, instance, **kwargs):
+    # Delete the associated image file when a Recipe is deleted
+    instance.recipe_image.delete(False)

@@ -9,8 +9,6 @@ def recipes(request):
     recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
 
     # search
-    # list of recipes
-    # recipe details page
     # add to favourite
     # comment recipe
     # rate recipe
@@ -71,9 +69,11 @@ def add_instructions(request, recipe_id):
         {"instruction_form": instruction_form, "recipe": recipe},
     )
 
-
-# i need to differentiate when to go from step 2 to step 3 and when to ad one more items
-# i need to differentiate when to go from step 3 to step thx page and when to ad one more items
+# add success page
+# add meal details page 
+# edit / update
+# delete
+#simplify main list
 
 
 def added_recipe(request):

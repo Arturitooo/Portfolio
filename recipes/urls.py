@@ -10,7 +10,7 @@ urlpatterns = [
     path(
         "add-instructions/<int:recipe_id>/", add_instructions, name="add_instructions"
     ),
-    path("add/success", added_recipe, name="added_recipe"),
+    path("add/success/", added_recipe, name="added_recipe"),
 ]
 
 if settings.DEBUG:

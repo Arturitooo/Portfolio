@@ -7,14 +7,13 @@
 <br />
 
 {% for recipe in recipes %}
-<h2>{{ recipe.recipe_name }}</h2>
+<h4>{{ recipe.recipe_name }}</h4>
 <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
 <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
 <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
 <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
 
-<img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.recipe_name }}">
-
+<img src="{{ recipe.recipe_image.url|slice:'1:' }}" alt="{{ recipe.recipe_name }}" width="200" height="200">
 
 <h3>Ingredients:</h3>
 <ul>
