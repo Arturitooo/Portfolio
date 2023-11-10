@@ -59,10 +59,21 @@ body {
 
     small {
         font-size: $small-size;
+        color: $text-faded-out;
+
+        & * {
+            font-size: inherit;
+        }
     }
 
     a {
         color: $primary-light;
         text-decoration-color: $g-yelpur-top;
     } 
+}
+
+.center-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
