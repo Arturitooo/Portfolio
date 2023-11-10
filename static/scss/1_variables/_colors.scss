@@ -1,5 +1,7 @@
 $primary-dark: #0B0B0B;
 $primary-light: #EEE;
+$text-light: #EEE;
+$text-faded-out: rgba(237, 237, 237, 0.5);
 $shadow: rgba(0,0,0,.1);
 $placeholder-text: rgba(255,255,255,0.4);
 $input-border: rgba(255,255,255,0.4);
@@ -18,3 +20,7 @@ $g-yelpur-bottom: #2D27FF;
 $g-blue-top: #00ff95;
 $g-blue-middle: #0B59FF;
 $g-blue-bottom: #0f00e3;
+
+/* success and errors */ 
+$success: green;
+$error: red;
