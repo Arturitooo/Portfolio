@@ -1,18 +1,35 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, UpdateView, DeleteView
 from .forms import RecipeForm, IngredientForm, InstructionForm
 from .models import Recipe
 
-
-# Create your views here.
-def recipes(request):
-
-    recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
-
+#TODO 
+    # edit / update
+    # delete
     # search
     # add to favourite
     # comment recipe
     # rate recipe
+    # add success page
+
+# Create your views here.
+def recipes(request):
+    recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
     return render(request, "recipes/index.html", {'recipes': recipes})
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+
+class RecipeUpdateView(UpdateView):
+    model = Recipe
+    fields = "__all__"
+    success_url = reverse_lazy("added_recipe")
+
+class RecipeDeletelView(DeleteView):
+    model = Recipe
+    template_name = "recipe_confirm_delete.html"
+    success_url = reverse_lazy("added_recipe")
 
 
 def add_recipe(request):
@@ -68,13 +85,6 @@ def add_instructions(request, recipe_id):
         "recipes/add_instructions.html",
         {"instruction_form": instruction_form, "recipe": recipe},
     )
-
-# add success page
-# add meal details page 
-# edit / update
-# delete
-#simplify main list
-
 
 def added_recipe(request):
     # RecipeCreateView success page

@@ -1,34 +1,20 @@
 {% extends 'base_layout.html' %} {% block title %} Main Recipes page
 {%endblock%} {% block content %}
-<h3>The page with recipes!</h3>
+<h2>The page with recipes!</h2>
+<br /><br />
+<a href="{% url 'add_recipe' %}"><b>Add new recipe here</b></a>
 <br />
-<a href="{% url 'add_recipe' %}">Add new recipe here</a>
-
 <br />
 
 {% for recipe in recipes %}
-<h4>{{ recipe.recipe_name }}</h4>
+<a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
 <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
 <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
 <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
 <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
 
-<img src="{{ recipe.recipe_image.url|slice:'1:' }}" alt="{{ recipe.recipe_name }}" width="200" height="200">
+<img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="200" height="200">
 
-<h3>Ingredients:</h3>
-<ul>
-  {% for ingredient in recipe.ingredient_set.all %}
-  <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }}</li>
-  {% endfor %}
-  
-<h3>Instructions:</h3>
-<ol>
-  {% for instruction in recipe.instruction_set.all %}
-  <li><b>{{ instruction.step_number }}</b>: {{ instruction.description }}</li>
-  {% endfor %}
-</ol>
-
-<hr />
 {% endfor %}
 
 <br />
