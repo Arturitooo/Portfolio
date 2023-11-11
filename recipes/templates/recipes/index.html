@@ -1,24 +1,50 @@
 {% extends 'base_layout.html' %} {% block title %} Main Recipes page
 {%endblock%} {% block content %}
 <h2>The page with recipes!</h2>
-<br /><br />
 <a href="{% url 'add_recipe' %}"><b>Add new recipe here</b></a>
-<br />
-<br />
-
-{% for recipe in recipes %}
-<a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
-<p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-<p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
-<p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
-<p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
-
-<img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="200" height="200">
-
-{% endfor %}
-
-<br />
-<br />
-<a href="{% url 'mainpage' %}">Back to mainpage</a>
-<br />
+<section class="center-page recipes-list">
+    <div class="recipes-list__item">
+        {% for recipe in recipes %}
+        <div class="recipes-list__item__img">
+            <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
+        </div>
+        <div class="recipes-list__item__data">
+            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
+            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
+            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
+            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
+            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
+        </div>
+        {% endfor %}
+    </div>
+    <div class="recipes-list__item">
+        {% for recipe in recipes %}
+        <div class="recipes-list__item__img">
+            <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
+        </div>
+        <div class="recipes-list__item__data">
+            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
+            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
+            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
+            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
+            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
+        </div>
+        {% endfor %}
+    </div>
+    <div class="recipes-list__item">
+        {% for recipe in recipes %}
+        <div class="recipes-list__item__img">
+            <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
+        </div>
+        <div class="recipes-list__item__data">
+            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
+            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
+            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
+            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
+            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'mainpage' %}">Back to mainpage</a>
+</section>
 {% endblock %}

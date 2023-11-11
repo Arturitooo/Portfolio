@@ -20,7 +20,7 @@ body .body-gradient.no-menu-bg {
 }
 body main {
   position: relative;
-  top: 64px;
+  top: 30px;
   left: 0;
   padding-top: 70px;
 }
@@ -324,6 +324,29 @@ input ::placeholder {
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 5;
+}
+
+.recipes-list {
+  position: relative;
+  top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  justify-content: center;
+  column-gap: 60px;
+  row-gap: 30px;
+}
+.recipes-list__item {
+  background-color: #0F1217;
+  border-radius: 20px;
+}
+.recipes-list__item img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+.recipes-list__item__data {
+  padding: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
