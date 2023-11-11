@@ -18,22 +18,20 @@
   {% for ingredient in recipe.ingredient_set.all %}
   <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }}</li>
   {% endfor %}
-  
+</ul>
 <h3>Instructions</h3>
-<ol>
+<ul>
   {% for instruction in recipe.instruction_set.all %}
   <li><b>{{ instruction.step_number }}</b>: {{ instruction.description }}</li>
   {% endfor %}
-</ol>
-
-<hr />
-
+</ul>
 <br />
+<hr />
 <br />
 <a href="{% url 'recipes' %}">Back to recipes page</a>
 <br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>
-
+<br />
 
 
 {% endblock %}
