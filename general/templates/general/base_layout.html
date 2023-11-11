@@ -4,6 +4,7 @@
   <head>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <img class="body-gradient {% block background_class %}{% endblock %}" src="https://daily-now-res.cloudinary.com/image/upload/s--O8GDhJO8--/f_auto/v1692271285/public/Desktop-ask-bg" alt="Gradient background">
@@ -22,5 +23,6 @@
     <script>
       if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
     </script>
+    <script src="{% static 'js/password-validation.js' %}"></script>
   </body>
 </html>
