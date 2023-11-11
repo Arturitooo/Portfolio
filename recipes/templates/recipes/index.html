@@ -3,8 +3,8 @@
 <h2>The page with recipes!</h2>
 <a href="{% url 'add_recipe' %}"><b>Add new recipe here</b></a>
 <section class="center-page recipes-list">
+    {% for recipe in recipes %}
     <div class="recipes-list__item">
-        {% for recipe in recipes %}
         <div class="recipes-list__item__img">
             <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
         </div>
@@ -15,36 +15,8 @@
             <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
             <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
         </div>
-        {% endfor %}
     </div>
-    <div class="recipes-list__item">
-        {% for recipe in recipes %}
-        <div class="recipes-list__item__img">
-            <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
-        </div>
-        <div class="recipes-list__item__data">
-            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
-            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
-            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
-            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
-        </div>
-        {% endfor %}
-    </div>
-    <div class="recipes-list__item">
-        {% for recipe in recipes %}
-        <div class="recipes-list__item__img">
-            <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
-        </div>
-        <div class="recipes-list__item__data">
-            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
-            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
-            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
-            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
-        </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
     <a href="{% url 'mainpage' %}">Back to mainpage</a>
 </section>
 {% endblock %}
