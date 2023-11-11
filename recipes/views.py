@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, DeleteView
 from .forms import RecipeForm, IngredientForm, InstructionForm
-from .models import Recipe
+from .models import Recipe, Ingredient, Instruction
 
 #TODO 
     # edit / update
@@ -26,9 +26,9 @@ class RecipeUpdateView(UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("added_recipe")
 
-class RecipeDeletelView(DeleteView):
+class RecipeDeleteView(DeleteView):
     model = Recipe
-    template_name = "recipe_confirm_delete.html"
+    template_name = "recipes/recipe_confirm_delete.html"
     success_url = reverse_lazy("added_recipe")
 
 
@@ -66,6 +66,16 @@ def add_ingredients(request, recipe_id):
         {"ingredient_form": ingredient_form, "recipe": recipe},
     )
 
+class IngredientUpdateView(UpdateView):
+    model = Ingredient
+    fields = "__all__"
+    success_url = reverse_lazy("added_recipe")
+
+class IngredientDeleteView(DeleteView):
+    model = Ingredient
+    template_name = "recipes/ingredient_confirm_delete.html"
+    success_url = reverse_lazy("added_recipe")
+
 
 def add_instructions(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
@@ -85,6 +95,16 @@ def add_instructions(request, recipe_id):
         "recipes/add_instructions.html",
         {"instruction_form": instruction_form, "recipe": recipe},
     )
+
+class InstructionUpdateView(UpdateView):
+    model = Instruction
+    fields = "__all__"
+    success_url = reverse_lazy("added_recipe")
+
+class InstructionDeleteView(DeleteView):
+    model = Instruction
+    template_name = "recipes/Instruction_confirm_delete.html"
+    success_url = reverse_lazy("added_recipe")
 
 def added_recipe(request):
     # RecipeCreateView success page

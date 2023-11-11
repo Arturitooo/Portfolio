@@ -1,17 +1,17 @@
-{% extends 'base_layout.html' %} {% block title %} Deleting the recipe nr {{recipe.pk}}{%endblock%}
+{% extends 'base_layout.html' %}{% block title %} Deleting the recipe nr {{recipe.pk}}{%endblock%}
 {%block content %}
-<h3>Confirm deleting the recipe:{{recipe.recipe_name}}</h3><br/><br/>
+<h3>Confirm deleting the recipe: {{recipe.recipe_name}}</h3><br/><br/>
 
 {{recipe}}
 
 <br/><br/>
 <form method="post">
   {% csrf_token %}
-  <input type="submit" value="Confirm deleting the recipe">
+  <button type="submit"> Confirm deleting the recipe</button>
 </form>
 <br />
 <br />
 <a href="{% url 'recipes' %}">Back to recipes page</a><br />
 <a href="{% url 'mainpage' %}">Back to mainpage</a>
-
+<br />
 {% endblock %}
