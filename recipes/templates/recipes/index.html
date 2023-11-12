@@ -5,16 +5,25 @@
 <section class="center-page recipes-list">
     {% for recipe in recipes %}
     <div class="recipes-list__item">
+        <a href="recipe-detail/{{ recipe.pk }}">
         <div class="recipes-list__item__img">
             <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="300" height="200">
         </div>
         <div class="recipes-list__item__data">
-            <a href="recipe-detail/{{recipe.pk}}"><h4>{{ recipe.recipe_name }}</h4></a>
-            <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-            <p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
-            <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
-            <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>  
+            <h3><strong>{{ recipe.recipe_name }}</strong></h3>
+            <div class="recipes-list__item__data__group">
+                <span class="value">{{ recipe.time_consumption }} min.</span>
+                <span class="label">Time</span>
+            
+                <span class="value">{{ recipe.cuisine }}</span>
+                <span class="label">Cuisine</span>
+
+                <span class="value">{{ recipe.meal_type }}</span>
+                <span class="label">Meal</span>
+            </div>      
+            <p><small>author: {{ recipe.recipe_author.username }}</small></p>
         </div>
+        </a>
     </div>
     {% endfor %}
     <a href="{% url 'mainpage' %}">Back to mainpage</a>

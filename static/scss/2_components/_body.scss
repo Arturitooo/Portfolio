@@ -22,13 +22,19 @@ body {
         top: 30px;
         left: 0;
         padding-top: 70px;
+
+        & > h1,
+        & > h2,
+        & > h3,
+        & > h4 {
+            text-align: center;
+        }
     }
 
     h1,
     h2,
     h3,
     h4 {
-        text-align: center;
         text-decoration: none;
         line-height: 1.25em;
         margin: 0.35em 0;
