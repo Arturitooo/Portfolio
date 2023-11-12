@@ -8,6 +8,8 @@ from .models import Recipe, Ingredient, Instruction, Favorite_recipe
 #TODO 
     # comment recipe
     # rate recipe
+    # add the average rate to recipe card in list
+    # sorting recipes (pk = default, alphabetically & rate)
     # search in recipes
 
 # Create your views here.
