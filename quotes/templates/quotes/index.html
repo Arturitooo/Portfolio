@@ -9,13 +9,13 @@
   <i>{{author}} </i>
   <br />
   <p><form method="post">
-    {% csrf_token %}<div class="button btn-g-yelpur"><div class="ahref--bg"><button type="submit" name="add_favourite">
+    {% csrf_token %}<div class="button btn-yelpur"><div class="ahref--bg"><button type="submit" name="add_favourite">
       Add to favourite⭐
       <input type="hidden" name="content" value="{{content}}">
       <input type="hidden" name="author" value="{{author}}">
     </button></div></div>
   </form></p>
-  <p><div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'quote' %}">Generate new quote</div></div></p>
+  <p><div class="button btn-yelpur"><div class="ahref--bg"><a href="{% url 'quote' %}">Generate new quote</div></div></p>
 </center>
 
 {% if list_favourite_quotes %}

@@ -1,37 +1,39 @@
 {% extends 'base_layout.html' %} {% block title %} Recipe nr {{recipe.pk}} detail view {%endblock%}
 {% block content %}
 
-<br />
-<h4>{{ recipe.recipe_name }} &nbsp;<a href="{% url 'recipe_update' recipe.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'recipe_delete' recipe.pk %}" style="text-decoration: none">❌</a></h4> 
+<section class="center-page recipe-detail">
+  <a href="{% url 'recipes' %}" class="link link-orange">⬅ Back to recipes page</a>
+  <div class="recipe-detail__img" style="background-image: url('/recipes{{ recipe.recipe_image.url}}');"></div>
+  <div class="recipe-detail__data">
+    <h2><strong>{{ recipe.recipe_name }}</strong><a href="{% url 'recipe_update' recipe.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'recipe_delete' recipe.pk %}" style="text-decoration: none">❌</a></h2>
+    <div class="recipe-detail__data__group">
+      <span class="label label--time">Time needed: </span>
+      <span class="value">{{ recipe.time }} min.</span>
+  
+      <span class="label label--cuisine">Cuisine: </span>
+      <span class="value">{{ recipe.cuisine }}</span>
 
+      <span class="label label--meal-type">Meal type: </span>
+      <span class="value">{{ recipe.meal_type }}</span>
+    </div>      
+    <p><small>author: {{ recipe.recipe_author.username }}</small></p>
+  </div>
 
-
-<p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-<p><b>Time</b>: {{ recipe.time }} minutes</p>
-<p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
-<p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
-
-<img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="200" height="200">
-<br/><br/>
-<h3>Ingredients <a href="{% url 'add_ingredients' recipe.pk %}" style="text-decoration: none">➕</a></h3>
-<ul>
-  {% for ingredient in recipe.ingredient_set.all %}
-  <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }} &nbsp;<a href="{% url 'ingredient_update' ingredient.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'ingredient_delete' ingredient.pk %}" style="text-decoration: none">❌</a></li>
-  {% endfor %}
-</ul>
-<br/>
-<h3>Instructions <a href="{% url 'add_instructions' recipe.pk %}" style="text-decoration: none">➕</a></h3><br/>
-<ul>
-  {% for instruction in recipe.instruction_set.all %}
-  <li><b>{{ instruction.step }}</b>: {{ instruction.description }} &nbsp;<a href="{% url 'instruction_update' instruction.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'instruction_delete' instruction.pk %}" style="text-decoration: none">❌</a></li><br/>
-  {% endfor %}
-</ul>
-<br />
-<hr />
-<br />
-<a href="{% url 'recipes' %}">Back to recipes page</a>
-<br />
-<br />
-
-
+  <div class="recipe-content__instructions">
+      <h3>Instructions <a href="{% url 'add_instructions' recipe.pk %}" style="text-decoration: none">➕</a></h3>
+      <ul>
+        {% for instruction in recipe.instruction_set.all %}
+        <li><b>{{ instruction.step }}</b>: {{ instruction.description }} &nbsp;<a href="{% url 'instruction_update' instruction.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'instruction_delete' instruction.pk %}" style="text-decoration: none">❌</a></li><br/>
+        {% endfor %}
+      </ul>
+  </div>
+  <div class="recipe-content__ingredients">
+      <h3>Ingredients <a href="{% url 'add_ingredients' recipe.pk  %}" style="text-decoration: none">➕</a></h3>
+      <ul>
+        {% for ingredient in recipe.ingredient_set.all %}
+        <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }} &nbsp;<a href="{% url 'ingredient_update' ingredient.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'ingredient_delete' ingredient.pk %}" style="text-decoration: none">❌</a></li>
+        {% endfor %}
+      </ul>
+  </div>
+</section>
 {% endblock %}
