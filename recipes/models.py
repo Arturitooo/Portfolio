@@ -34,6 +34,16 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f"{self.recipe_author} - {self.recipe_name} - {self.pk}"
+    
+class Favorite_recipe(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username} favorite recipes"
+    
+    class Meta:
+        unique_together = ['user', 'recipe']
 
 
 class Ingredient(models.Model):
@@ -51,7 +61,7 @@ class Instruction(models.Model):
     description = models.CharField(max_length=1500)
 
     def __str__(self):
-        return f"{self.recipe} - {self.step_number}"
+        return f"{self.recipe} - {self.step}"
 
 @receiver(pre_delete, sender=Recipe)
 def delete_recipe(sender, instance, **kwargs):

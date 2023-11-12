@@ -13,7 +13,8 @@ from .models import Recipe, Ingredient, Instruction
 # Create your views here.
 def recipes(request):
     recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
-    return render(request, "recipes/index.html", {'recipes': recipes})
+    recipes_counter = len(Recipe.objects.all())
+    return render(request, "recipes/index.html", context = {'recipes': recipes,'recipes_counter': recipes_counter})
 
 class RecipeDetailView(DetailView):
     model = Recipe
