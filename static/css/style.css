@@ -1,6 +1,10 @@
 /* gradients */
 /* success and errors */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+:root {
+  --recipe-image-url: {{ recipe.recipe_image.url }};
+}
+
 body {
   background-color: #0B0B0B;
   color: #EEE;
@@ -61,6 +65,7 @@ body small * {
   font-size: inherit;
 }
 body a {
+  line-height: 15px;
   color: #EEE;
   text-decoration-color: #ff9d00;
 }
@@ -202,17 +207,35 @@ form {
 
 header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  column-gap: 20px;
-  position: absolute;
-  top: 0;
+  position: fixed;
   width: calc(100% - 200px);
   padding: 10px 100px;
   background: #0B0B0B;
+  height: 40px;
+  z-index: 100;
 }
-header.no-menu {
+header nav.menu-nav {
+  display: flex;
+  column-gap: 20px;
+}
+header nav.menu-nav a {
+  text-decoration: none;
+  font-size: 25px;
+  line-height: 25px;
+}
+header .menu-item {
+  justify-self: flex-start;
+}
+header.no-menu .profile-nav {
   display: none;
+}
+header .profile-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
 }
 
 input,
@@ -339,24 +362,32 @@ input ::placeholder {
   column-gap: 60px;
   row-gap: 30px;
 }
+.recipes-list .recipe-add {
+  grid-column: 1/4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 .recipes-list__item {
   background-color: #0F1217;
   border-radius: 20px;
+  overflow: hidden;
 }
 .recipes-list__item a {
   text-decoration: none;
 }
 .recipes-list__item__img {
-  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 20px 20px 0 0;
   width: 300px;
-  height: 200px;
-}
-.recipes-list__item__img img {
-  width: 100%;
-  height: auto;
   min-height: 200px;
-  border-radius: 10px 10px 0 0;
+  height: auto;
+}
+.recipes-list__item__img:hover {
+  transform: scale(1.03);
+  transition: 0.3s ease-out;
 }
 .recipes-list__item__data {
   padding: 15px;
@@ -380,10 +411,6 @@ input ::placeholder {
   margin: 0;
   margin-top: 30px;
   text-align: right;
-}
-.recipes-list__item:hover img {
-  transform: scale(1.03);
-  transition: 0.3s ease-out;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,3 +1,4 @@
+
 .recipes-list { 
     position: relative;
     top: 20px;
@@ -8,26 +9,35 @@
     justify-content: center;
     column-gap: 60px;
     row-gap: 30px;
+    
+    .recipe-add {
+        grid-column: 1 / 4;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
 
     &__item {
         background-color: $input-background;
         border-radius: 20px;
+        overflow: hidden;
 
         & a {
             text-decoration: none;
         }
         
         &__img {
-            overflow: hidden;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
             border-radius: 20px 20px 0 0;
             width: 300px;
-            height: 200px;
+            min-height: 200px;
+            height: auto;
 
-            img {
-                width: 100%;
-                height: auto;
-                min-height: 200px;
-                border-radius: 10px 10px 0 0;
+            &:hover {
+                transform: scale(1.03);
+                transition: 0.3s ease-out;
             }
         }
         
@@ -57,11 +67,6 @@
                 margin-top: 30px;
                 text-align: right;
             }
-        }
-
-        &:hover img {
-            transform: scale(1.03);
-            transition: 0.3s ease-out;
         }
     }
 }
