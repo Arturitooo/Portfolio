@@ -2,7 +2,22 @@
 {%block content %}
 <h3>Confirm deleting the recipe: {{recipe.recipe_name}}</h3><br/><br/>
 
-{{recipe}}
+
+    <div class="recipes-list__item__data">
+        <center><h3><strong>{{ recipe.recipe_name }}</strong></h3></center>
+        <div class="recipes-list__item__data__group">
+            <span class="value">{{ recipe.time }} min.</span>
+            <span class="label">Time</span>
+        
+            <span class="value">{{ recipe.cuisine }}</span>
+            <span class="label">Cuisine</span>
+
+            <span class="value">{{ recipe.meal_type }}</span>
+            <span class="label">Meal</span>
+        </div>      
+        <p><small>author: {{ recipe.recipe_author.username }}</small></p>
+    </div>
+    </a>
 
 <br/><br/>
 <form method="post">

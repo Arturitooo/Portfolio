@@ -5,13 +5,10 @@ from .forms import RecipeForm, IngredientForm, InstructionForm
 from .models import Recipe, Ingredient, Instruction
 
 #TODO 
-    # edit / update
-    # delete
-    # search
     # add to favourite
     # comment recipe
     # rate recipe
-    # add success page
+    # search in recipes
 
 # Create your views here.
 def recipes(request):
@@ -23,13 +20,19 @@ class RecipeDetailView(DetailView):
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = "__all__"
-    success_url = reverse_lazy("added_recipe")
+    fields = [
+            "recipe_name",
+            "time",
+            "cuisine",
+            "meal_type",
+            "recipe_image",
+        ]
+    success_url = reverse_lazy("success_page")
 
 class RecipeDeleteView(DeleteView):
     model = Recipe
     template_name = "recipes/recipe_confirm_delete.html"
-    success_url = reverse_lazy("added_recipe")
+    success_url = reverse_lazy("recipes")
 
 
 def add_recipe(request):
@@ -68,13 +71,16 @@ def add_ingredients(request, recipe_id):
 
 class IngredientUpdateView(UpdateView):
     model = Ingredient
-    fields = "__all__"
-    success_url = reverse_lazy("added_recipe")
+    fields = [
+            "name",
+            "amount",
+        ]
+    success_url = reverse_lazy("success_page")
 
 class IngredientDeleteView(DeleteView):
     model = Ingredient
     template_name = "recipes/ingredient_confirm_delete.html"
-    success_url = reverse_lazy("added_recipe")
+    success_url = reverse_lazy("success_page")
 
 
 def add_instructions(request, recipe_id):
@@ -98,14 +104,17 @@ def add_instructions(request, recipe_id):
 
 class InstructionUpdateView(UpdateView):
     model = Instruction
-    fields = "__all__"
-    success_url = reverse_lazy("added_recipe")
+    fields = [
+            "step",
+            "description",
+        ]
+    success_url = reverse_lazy("success_page")
 
 class InstructionDeleteView(DeleteView):
     model = Instruction
     template_name = "recipes/Instruction_confirm_delete.html"
-    success_url = reverse_lazy("added_recipe")
+    success_url = reverse_lazy("success_page")
 
-def added_recipe(request):
+def success_page(request):
     # RecipeCreateView success page
-    return render(request, "recipes/added_recipe.html")
+    return render(request, "recipes/success.html")

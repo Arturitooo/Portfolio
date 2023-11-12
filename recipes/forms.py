@@ -7,7 +7,7 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = [
             "recipe_name",
-            "time_consumption",
+            "time",
             "cuisine",
             "meal_type",
             "recipe_image",
@@ -27,6 +27,6 @@ class InstructionForm(forms.ModelForm):
     class Meta:
         model = Instruction
         fields = [
-            "step_number",
+            "step",
             "description",
         ]

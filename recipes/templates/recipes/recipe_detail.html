@@ -7,22 +7,23 @@
 
 
 <p><b>Author</b>: {{ recipe.recipe_author.username }}</p>
-<p><b>Time Consumption</b>: {{ recipe.time_consumption }} minutes</p>
+<p><b>Time</b>: {{ recipe.time }} minutes</p>
 <p><b>Cuisine</b>: {{ recipe.cuisine }}</p>
 <p><b>Meal Type</b>: {{ recipe.meal_type }}</p>
 
 <img src="/recipes{{ recipe.recipe_image.url}}" alt="{{ recipe.recipe_name }}" width="200" height="200">
-
-<h3>Ingredients</h3>
+<br/><br/>
+<h3>Ingredients <a href="{% url 'add_ingredients' recipe.pk %}" style="text-decoration: none">➕</a></h3>
 <ul>
   {% for ingredient in recipe.ingredient_set.all %}
-  <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }}</li>
+  <li><b>{{ ingredient.name }}</b> - {{ ingredient.amount }} &nbsp;<a href="{% url 'ingredient_update' ingredient.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'ingredient_delete' ingredient.pk %}" style="text-decoration: none">❌</a></li>
   {% endfor %}
 </ul>
-<h3>Instructions</h3>
+<br/>
+<h3>Instructions <a href="{% url 'add_instructions' recipe.pk %}" style="text-decoration: none">➕</a></h3><br/>
 <ul>
   {% for instruction in recipe.instruction_set.all %}
-  <li><b>{{ instruction.step_number }}</b>: {{ instruction.description }}</li>
+  <li><b>{{ instruction.step }}</b>: {{ instruction.description }} &nbsp;<a href="{% url 'instruction_update' instruction.pk %}" style="text-decoration: none">✏️</a><a href="{% url 'instruction_delete' instruction.pk %}" style="text-decoration: none">❌</a></li><br/>
   {% endfor %}
 </ul>
 <br />

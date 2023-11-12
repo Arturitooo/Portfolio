@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %} {% block title %} Update the ingredient: {{ingredient.name}}{%endblock%}
+{%block content %}
+<h3>Update the ingredient: "{{ingredient.name}}" in the "{{ingredient.recipe.recipe_name}}" recipe</h3>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Update the Recipe</button>
+</form>
+<br />
+<br />
+<a href="{% url 'recipe_detail' ingredient.recipe.pk %}">Back to the "{{ingredient.recipe.recipe_name}}" recipe </a><br />
+<a href="{% url 'recipes' %}">Back to recipes page</a><br />
+<a href="{% url 'mainpage' %}">Back to mainpage</a>
+
+{% endblock %}

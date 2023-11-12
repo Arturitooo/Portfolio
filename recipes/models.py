@@ -4,7 +4,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 
 CUISINE_COUNTRIES = [
-    ("Polish;", "Polish"),
+    ("Polish", "Polish"),
     ("German", "German"),
     ("Italian", "Italian"),
     ("French", "French"),
@@ -16,7 +16,7 @@ CUISINE_COUNTRIES = [
 ]
 
 MEALS = [
-    ("Breafkfest", "Breafkfest"),
+    ("Breafkfest", "Breakfast"),
     ("Brunch", "Brunch"),
     ("Dinner", "Dinner"),
     ("Supper", "Supper"),
@@ -27,7 +27,7 @@ MEALS = [
 class Recipe(models.Model):
     recipe_author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     recipe_name = models.CharField(max_length=250)
-    time_consumption = models.IntegerField()  # hours - 1,5 should give user 1h30min
+    time = models.IntegerField()  # hours - 1,5 should give user 1h30min
     cuisine = models.CharField(choices=CUISINE_COUNTRIES, max_length=50)
     meal_type = models.CharField(choices=MEALS, max_length=50)
     recipe_image = models.ImageField(upload_to="recipes/")
@@ -47,7 +47,7 @@ class Ingredient(models.Model):
 
 class Instruction(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    step_number = models.CharField(max_length=50)
+    step = models.CharField(max_length=50)
     description = models.CharField(max_length=1500)
 
     def __str__(self):
