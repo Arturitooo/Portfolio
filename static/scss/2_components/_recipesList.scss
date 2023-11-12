@@ -1,3 +1,4 @@
+
 .recipes-list { 
     position: relative;
     top: 20px;
@@ -8,6 +9,13 @@
     justify-content: center;
     column-gap: 60px;
     row-gap: 30px;
+    
+    .recipe-add {
+        grid-column: 1 / 4;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
 
     &__item {
         background-color: $input-background;
@@ -28,7 +36,7 @@
             height: auto;
 
             &:hover {
-                transform: scale    (1.03);
+                transform: scale(1.03);
                 transition: 0.3s ease-out;
             }
         }

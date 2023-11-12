@@ -5,7 +5,6 @@
 {% block content %}
     <h1>Login</h1>
     <section class="center-page login-page__container">
-    <a href="{% url 'mainpage' %}" class="link-left back-link link-purple">⬅ Home</a>
     <form method="post">
       {% csrf_token %}
       <input type="text" id="username" name="username" required placeholder="Username"/>

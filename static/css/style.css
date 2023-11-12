@@ -362,6 +362,12 @@ input ::placeholder {
   column-gap: 60px;
   row-gap: 30px;
 }
+.recipes-list .recipe-add {
+  grid-column: 1/4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 .recipes-list__item {
   background-color: #0F1217;
   border-radius: 20px;
@@ -380,7 +386,7 @@ input ::placeholder {
   height: auto;
 }
 .recipes-list__item__img:hover {
-  transform: scale 1.03;
+  transform: scale(1.03);
   transition: 0.3s ease-out;
 }
 .recipes-list__item__data {

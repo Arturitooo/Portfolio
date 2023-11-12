@@ -1,8 +1,12 @@
 {% extends 'base_layout.html' %} {% block title %} Main Recipes page
 {%endblock%} {% block content %}
-<h2>The page with recipes!</h2>
-<a href="{% url 'add_recipe' %}"><b>Add new recipe here</b></a>
+<h2>All recipes in ArtPlayground</h2>
+
 <section class="center-page recipes-list">
+    <div class="recipe-add">
+        <h4>Explore all X recipes</h4>
+        <div class="button btn-g-blue"><div class="ahref--bg"><a href="{% url 'add_recipe' %}">+ Add</a></div></div>
+    </div>
     {% for recipe in recipes %}
     <div class="recipes-list__item">
         <a href="recipe-detail/{{ recipe.pk }}">

@@ -5,7 +5,6 @@
 {% block content %}
   <h1>Register</h1>
   <section class="center-page login-page__container">
-  <a href="{% url 'mainpage' %}" class="link-left back-link link-blue">⬅ Home</a>
     <form method="post">
       {% csrf_token %}
         <div class="form-group">
