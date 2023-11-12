@@ -13,7 +13,7 @@ class RecipeForm(forms.ModelForm):
             "recipe_image",
         ]
 
-class FavoriteRecipeForm(forms.Form):
+class FavoriteRecipeForm(forms.ModelForm):
     class Meta:
         model = Favorite_recipe
         fields = ['user','recipe']

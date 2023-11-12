@@ -1,6 +1,20 @@
 {% extends 'base_layout.html' %} {% block title %} Recipe nr {{recipe.pk}} detail view {%endblock%}
 {% block content %}
 
+{% if is_favorite == False %}
+<form method="post" action="{% url 'recipe_detail' recipe.pk %}">
+  {% csrf_token %}
+  <input type="hidden" name="recipe" value="{{recipe}}">
+  <button type="submit"  name="add_favorite">Add to Favorites</button>
+</form>
+{% else %}
+<form method="post" action="{% url 'recipe_detail' recipe.pk %}">
+  {% csrf_token %}
+  <input type="hidden" name="remove_favorite" value="recipe.pk">
+  <button type="submit"  name="remove_favorite">Remove from Favorites</button>
+</form>
+{% endif %}
+
 <section class="center-page recipe-detail">
   <a href="{% url 'recipes' %}" class="link link-orange">⬅ Back to recipes page</a>
   <div class="recipe-detail__img" style="background-image: url('/recipes{{ recipe.recipe_image.url}}');"></div>

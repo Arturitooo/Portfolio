@@ -40,7 +40,7 @@ class Favorite_recipe(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user.username} favorite recipes"
+        return f'User "{self.user.username}" added the "{self.recipe.recipe_name}" to his favorites'
     
     class Meta:
         unique_together = ['user', 'recipe']

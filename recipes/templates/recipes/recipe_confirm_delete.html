@@ -1,12 +1,12 @@
-{% extends 'base_layout.html' %}{% block title %} Deleting the recipe nr {{recipe.pk}}{%endblock%}
+{% extends 'base_layout.html' %}{% block title %} Remove the recipe nr {{favorite_recipe.recipe.pk}} from your favorites list{%endblock%}
 {%block content %}
-<h3>Confirm deleting the recipe: {{recipe.recipe_name}}</h3><br/><br/>
+<h3>Confirm deleting the recipe: {{favorite_recipe.recipe.recipe_name}} from your favorites</h3><br/><br/>
 
 
     <div class="recipes-list__item__data">
         <center><h3><strong>{{ recipe.recipe_name }}</strong></h3></center>
         <div class="recipes-list__item__data__group">
-            <span class="value">{{ recipe.time }} min.</span>
+            <span class="value">{{ favorite_recipe.recipe.time }} min.</span>
             <span class="label">Time</span>
         
             <span class="value">{{ recipe.cuisine }}</span>

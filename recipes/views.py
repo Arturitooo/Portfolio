@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView, DeleteView
-from .forms import RecipeForm, IngredientForm, InstructionForm
-from .models import Recipe, Ingredient, Instruction
+from django.views import View
+from django.views.generic import UpdateView, DeleteView
+from .forms import RecipeForm, IngredientForm, InstructionForm, FavoriteRecipeForm
+from .models import Recipe, Ingredient, Instruction, Favorite_recipe
 
 #TODO 
-    # add to favourite
     # comment recipe
     # rate recipe
     # search in recipes
@@ -13,11 +13,44 @@ from .models import Recipe, Ingredient, Instruction
 # Create your views here.
 def recipes(request):
     recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
-    recipes_counter = len(Recipe.objects.all())
-    return render(request, "recipes/index.html", context = {'recipes': recipes,'recipes_counter': recipes_counter})
+    recipes_counter = Recipe.objects.count()
 
-class RecipeDetailView(DetailView):
-    model = Recipe
+    get_fav_recipes = Favorite_recipe.objects.select_related('user').values('recipe')
+    favorite_recipes = Recipe.objects.filter(pk__in=get_fav_recipes)
+    favorite_recipes_counter = favorite_recipes.count()
+    return render(request, "recipes/index.html", context = {'recipes': recipes,'recipes_counter': recipes_counter,"favorite_recipes":favorite_recipes,"favorite_recipes_counter":favorite_recipes_counter})
+
+class RecipeDetailView(View):
+    template_name = 'recipes/recipe_detail.html'
+
+    #this code was added to add the recipe to "favorites"
+    def get(self, request, *args, **kwargs):
+        recipe = get_object_or_404(Recipe, pk=kwargs['pk'])
+        is_favorite = Favorite_recipe.objects.filter(user=request.user, recipe=recipe).exists()
+        context = {'recipe': recipe, "is_favorite":is_favorite}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        recipe = get_object_or_404(Recipe, pk=kwargs['pk'])
+        form = FavoriteRecipeForm({'user': request.user.pk, 'recipe': recipe.pk})
+
+        if 'add_favorite' in request.POST:
+            if form.is_valid():
+                # Save the form, adding the recipe to the user's favorites
+                favorite = form.save(commit=False)
+                favorite.user = request.user
+                favorite.recipe = recipe
+                favorite.save()
+                return redirect("success_page")
+            
+        elif 'remove_favorite' in request.POST:
+            favorite_recipe = Favorite_recipe.objects.get(user=request.user, recipe=recipe)
+            favorite_recipe.delete()
+            return redirect("success_page")
+        
+        form = FavoriteRecipeForm({'user': request.user.pk, 'recipe': recipe.pk})
+        context = {'recipe': recipe, 'form': form}
+        return render(request, self.template_name, context)
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
@@ -49,7 +82,6 @@ def add_recipe(request):
         recipe_form = RecipeForm()
 
     return render(request, "recipes/add_recipe.html", {"recipe_form": recipe_form})
-
 
 def add_ingredients(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
