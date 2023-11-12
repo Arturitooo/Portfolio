@@ -15,10 +15,10 @@
       <nav class="profile-nav">
         {% if user.is_authenticated %}
         Hello, {{user.username}}!
-        <div class="button btn-g-blue"><div class="ahref--bg"><a href="{% url 'logout' %}">Logout</a></div></div>
+        <div class="button btn-blue"><div class="ahref--bg"><a href="{% url 'logout' %}">Logout</a></div></div>
         {% else %}
-        <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'register' %}">Sign up</a></div></div>
-        <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'login' %}">Login</a></div></div>
+        <div class="button btn-yelpur-rev"><div class="ahref--bg"><a href="{% url 'register' %}">Sign up</a></div></div>
+        <div class="button btn-yelpur"><div class="ahref--bg"><a href="{% url 'login' %}">Login</a></div></div>
         {% endif %}
       </nav>
     </header>

@@ -41,7 +41,7 @@
         
     }
 
-    &.btn-g-blue {
+    &.btn-blue {
         background: linear-gradient(135deg, $g-blue-top, $g-blue-bottom);
         
         a,
@@ -52,7 +52,7 @@
         }   
     }
 
-    &.btn-g-yelpur {
+    &.btn-yelpur {
         background: linear-gradient(135deg, $g-yelpur-top, $g-yelpur-bottom);
         
         a,
@@ -63,7 +63,18 @@
         }   
     }
 
-    &.btn-g-purple {
+    &.btn-yelpur-rev {
+        background: linear-gradient(135deg, $g-yelpur-bottom, $g-yelpur-top);
+        
+        a,
+        button {
+            background: linear-gradient(135deg, $g-yelpur-bottom, $g-yelpur-top);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }   
+    }
+
+    &.btn-purple {
         background: linear-gradient(135deg, $g-purple-top, $g-purple-bottom);
 
         a,
