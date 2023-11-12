@@ -8,14 +8,19 @@
   </head>
   <body>
     <img class="body-gradient {% block background_class %}{% endblock %}" src="https://daily-now-res.cloudinary.com/image/upload/s--O8GDhJO8--/f_auto/v1692271285/public/Desktop-ask-bg" alt="Gradient background">
-    <header class="menu {% block header_class %}{% endblock %}">
-      {% if user.is_authenticated %}
+    <header class="{% block header_class %}{% endblock %}">
+      <nav class="menu-nav">
+        <a href="{% url 'mainpage' %}" class="menu-item">ArtPlayground</a>
+      </nav>
+      <nav class="profile-nav">
+        {% if user.is_authenticated %}
         Hello, {{user.username}}!
         <div class="button btn-g-blue"><div class="ahref--bg"><a href="{% url 'logout' %}">Logout</a></div></div>
-      {% else %}
-      <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'register' %}">Sign up</a></div></div>
-      <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'login' %}">Login</a></div></div>
-      {% endif %}
+        {% else %}
+        <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'register' %}">Sign up</a></div></div>
+        <div class="button btn-g-yelpur"><div class="ahref--bg"><a href="{% url 'login' %}">Login</a></div></div>
+        {% endif %}
+      </nav>
     </header>
     <main>
       {% block content %}{% endblock %}
