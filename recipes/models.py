@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 CUISINE_COUNTRIES = [
     ("Polish", "Polish"),
@@ -31,6 +32,8 @@ class Recipe(models.Model):
     cuisine = models.CharField(choices=CUISINE_COUNTRIES, max_length=50)
     meal_type = models.CharField(choices=MEALS, max_length=50)
     recipe_image = models.ImageField(upload_to="recipes/")
+    average_rating = models.DecimalField(default=0, max_digits=3, decimal_places=2)
+    total_ratings = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.recipe_author} - {self.recipe_name} - {self.pk}"
@@ -67,3 +70,15 @@ class Instruction(models.Model):
 def delete_recipe(sender, instance, **kwargs):
     # Delete the associated image file when a Recipe is deleted
     instance.recipe_image.delete(False)
+
+class RecipeRating(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    comment = models.TextField(blank=True, null=True)
+
+    class Meta:
+        unique_together = ['recipe', 'user']
+
+    def __str__(self):
+        return f'{self.user} gave "{self.recipe.recipe_name}" rating {self.rating} out of 5'

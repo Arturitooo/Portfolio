@@ -3,12 +3,10 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView, DeleteView
 from .forms import RecipeForm, IngredientForm, InstructionForm, FavoriteRecipeForm
-from .models import Recipe, Ingredient, Instruction, Favorite_recipe
+from .models import Recipe, Ingredient, Instruction, Favorite_recipe, RecipeRating
+from django.db.models import Avg
 
 #TODO 
-    # comment recipe
-    # rate recipe
-    # add the average rate to recipe card in list
     # sorting recipes (pk = default, alphabetically & rate)
     # search in recipes
 
@@ -29,11 +27,75 @@ class RecipeDetailView(View):
     def get(self, request, *args, **kwargs):
         recipe = get_object_or_404(Recipe, pk=kwargs['pk'])
         is_favorite = Favorite_recipe.objects.filter(user=request.user, recipe=recipe).exists()
-        context = {'recipe': recipe, "is_favorite":is_favorite}
+        
+        # Retrieve existing rating and comment for the logged-in user
+        user_rating = None
+        user_comment = None
+        if request.user.is_authenticated:
+            user_rating_obj = RecipeRating.objects.filter(recipe=recipe, user=request.user).first()
+            if user_rating_obj:
+                user_rating = user_rating_obj.rating
+                user_comment = user_rating_obj.comment
+
+        # Retrieve all ratings and comments for the recipe
+        all_ratings_and_comments = RecipeRating.objects.filter(recipe=recipe)
+        
+        # Calculate average rating
+        average_rating = all_ratings_and_comments.aggregate(Avg('rating'))['rating__avg'] or 0
+
+        # Check if the user has already provided a rating and comment
+        user_has_rated = user_rating is not None
+
+        context = {
+            'recipe': recipe,
+            'is_favorite': is_favorite,
+            'user_rating': user_rating,
+            'user_comment': user_comment,
+            'average_rating': round(average_rating, 2),
+            'total_ratings': all_ratings_and_comments.count(),
+            'all_ratings_and_comments': all_ratings_and_comments,
+            'user_has_rated': user_has_rated, 
+        }
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         recipe = get_object_or_404(Recipe, pk=kwargs['pk'])
+
+
+        # Handle rating and comment submission
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+
+        if rating and comment:
+            # Update or create a new rating
+            user_rating_obj, created = RecipeRating.objects.update_or_create(
+                recipe=recipe,
+                user=request.user,
+                defaults={'rating': rating, 'comment': comment}
+            )
+        elif rating:
+            # Only update the rating, keep the existing comment
+            user_rating_obj, created = RecipeRating.objects.update_or_create(
+                recipe=recipe,
+                user=request.user,
+                defaults={'rating': rating}
+            )
+        elif comment:
+            # Only update the comment, keep the existing rating
+            user_rating_obj, created = RecipeRating.objects.update_or_create(
+                recipe=recipe,
+                user=request.user,
+                defaults={'comment': comment}
+            )
+
+        # Update the average rating and total ratings for the recipe
+        all_ratings = RecipeRating.objects.filter(recipe=recipe)
+        total_ratings = all_ratings.count()
+        average_rating = all_ratings.aggregate(Avg('rating'))['rating__avg'] or 0
+        recipe.total_ratings = total_ratings
+        recipe.average_rating = round(average_rating, 2)
+        recipe.save()
+
         form = FavoriteRecipeForm({'user': request.user.pk, 'recipe': recipe.pk})
 
         if 'add_favorite' in request.POST:
