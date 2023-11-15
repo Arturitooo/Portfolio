@@ -4,21 +4,65 @@ from django.views import View
 from django.views.generic import UpdateView, DeleteView
 from .forms import RecipeForm, IngredientForm, InstructionForm, FavoriteRecipeForm
 from .models import Recipe, Ingredient, Instruction, Favorite_recipe, RecipeRating
-from django.db.models import Avg
-
-#TODO 
-    # sorting recipes (pk = default, alphabetically & rate)
-    # search in recipes
+from django.db.models import Avg, Q
 
 # Create your views here.
 def recipes(request):
-    recipes = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set').all()
-    recipes_counter = Recipe.objects.count()
+    # Get the sorting parameter from the request
+    sort_by = request.GET.get('sort_by', 'pk')
+
+    # Define the allowed sorting options
+    allowed_sorting = ['pk', 'recipe_name', 'average_rating']
+
+    # Check if the requested sorting option is allowed
+    if sort_by not in allowed_sorting:
+        sort_by = 'pk'
+
+    # Get the cuisine and meal type filters from the request
+    cuisine_filter = request.GET.get('cuisine', '')
+    meal_filter = request.GET.get('meal_type', '')
+
+    # Get the search query from the request
+    search_query = request.GET.get('q', '')
+
+    # Fetch recipes and apply sorting
+    recipes_queryset = Recipe.objects.select_related('recipe_author').prefetch_related('ingredient_set', 'instruction_set')
+
+    if sort_by == 'recipe_name':
+        recipes_queryset = recipes_queryset.order_by('recipe_name')
+    elif sort_by == 'average_rating':
+        recipes_queryset = recipes_queryset.order_by('-average_rating')
+
+    if cuisine_filter:
+        recipes_queryset = recipes_queryset.filter(cuisine=cuisine_filter)
+    if meal_filter:
+        recipes_queryset = recipes_queryset.filter(meal_type=meal_filter)
+
+    # Filter recipes based on the search query
+    if search_query:
+        recipes_queryset = recipes_queryset.filter(
+            Q(ingredient__name__icontains=search_query) |
+            Q(instruction__description__icontains=search_query) |
+            Q(recipe_name__icontains=search_query)
+        ).distinct()
+
+    recipes = recipes_queryset.all()
+    recipes_counter = recipes.count()
 
     get_fav_recipes = Favorite_recipe.objects.select_related('user').values('recipe')
     favorite_recipes = Recipe.objects.filter(pk__in=get_fav_recipes)
     favorite_recipes_counter = favorite_recipes.count()
-    return render(request, "recipes/index.html", context = {'recipes': recipes,'recipes_counter': recipes_counter,"favorite_recipes":favorite_recipes,"favorite_recipes_counter":favorite_recipes_counter})
+
+    context = {'recipes': recipes,
+               'recipes_counter': recipes_counter,
+               "favorite_recipes":favorite_recipes,
+               "favorite_recipes_counter":favorite_recipes_counter,
+               "sort_by":sort_by,
+               "cuisine_filter": cuisine_filter,
+               "meal_filter": meal_filter,
+               'search_query': search_query,
+               }
+    return render(request, "recipes/index.html", context)
 
 class RecipeDetailView(View):
     template_name = 'recipes/recipe_detail.html'

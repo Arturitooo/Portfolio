@@ -17,7 +17,7 @@ CUISINE_COUNTRIES = [
 ]
 
 MEALS = [
-    ("Breafkfest", "Breakfast"),
+    ("Breakfast", "Breakfast"),
     ("Brunch", "Brunch"),
     ("Dinner", "Dinner"),
     ("Supper", "Supper"),

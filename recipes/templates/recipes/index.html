@@ -1,8 +1,77 @@
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hide the favorite recipes section by default
+            $('#favoriteRecipesContainer').hide();
+    
+            // Toggle the visibility on button click
+            $('#toggleFavoriteRecipes').on('click', function () {
+                $('#favoriteRecipesContainer').toggle();
+            });
+        });
+    </script>
+
+<style>
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.selected-filter {
+    text-color: black;
+    padding: 2px 5px;
+    margin-left: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+</style>
+</head>
+
 {% extends 'base_layout.html' %} {% block title %} Main Recipes page
 {%endblock%} {% block content %}
 
 <h3>Your favorite recipes</h3>
-<section class="center-page recipes-list">
+<center><button id="toggleFavoriteRecipes">Toggle Favorite Recipes</button></center>
+<section id="favoriteRecipesContainer" class="center-page recipes-list">
     <div class="recipe-add">
         <h4>You have {{favorite_recipes_counter}} favorite recipes</h4>
     </div>
@@ -28,15 +97,62 @@
     </div>
     {% endfor %}
 </section>
-
-<br/><br/><br/><br/><br/>
-
+<br/>
 <h3>All recipes in ArtPlayground</h3>
 <section class="center-page recipes-list">
+    
     <div class="recipe-add">
         <h4>Explore all {{recipes_counter}} recipes</h4>
-        <div class="button btn-g-blue"><div class="ahref--bg"><a href="{% url 'add_recipe' %}">+ Add</a></div></div>
+        <div class="button btn-g-blue"><div class="ahref--bg"><a href="{% url 'add_recipe' %}">+ Add new recipe</a></div></div>
+        
+        <div class="dropdown">
+            <button class="dropbtn">Filters</button>
+            <div class="dropdown-content">
+                <a href="?cuisine=Polish">Polish</a>
+                <a href="?cuisine=German">German</a>
+                <a href="?cuisine=Italian">Italian</a>
+                <a href="?cuisine=French">French</a>
+                <a href="?cuisine=American">American</a>
+                <a href="?cuisine=Spanish">Spanish</a>
+                <a href="?cuisine=Japanese">Japanese</a>
+                <a href="?cuisine=Indian">Indian</a>
+                <a href="?cuisine=Other">Other</a>
+                <a href="?meal_type=Breakfast">Breakfast</a>
+                <a href="?meal_type=Brunch">Brunch</a>
+                <a href="?meal_type=Dinner">Dinner</a>
+                <a href="?meal_type=Supper">Supper</a>
+            </div>
+            {% if cuisine_filter %}
+                <span class="selected-filter">{{ cuisine_filter }}</span>
+            {% endif %}
+            {% if meal_filter %}
+                <span class="selected-filter">{{ meal_filter }}</span>
+            {% endif %}
+
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Sort</button>
+            <div class="dropdown-content">
+                <!-- Include existing filtering parameters in the sorting links -->
+                <a href="?sort_by=pk{% if cuisine_filter %}&cuisine={{ cuisine_filter }}{% endif %}{% if meal_filter %}&meal_type={{ meal_filter }}{% endif %}">ID (default)</a> |
+                <a href="?sort_by=recipe_name{% if cuisine_filter %}&cuisine={{ cuisine_filter }}{% endif %}{% if meal_filter %}&meal_type={{ meal_filter }}{% endif %}">Alphabetically</a> |
+                <a href="?sort_by=average_rating{% if cuisine_filter %}&cuisine={{ cuisine_filter }}{% endif %}{% if meal_filter %}&meal_type={{ meal_filter }}{% endif %}">Rating</a>
+            </div>
+            {% if sort_by %}
+                <span class="selected-filter">{{ sort_by }}</span>
+            {% endif %}
+        </div>
+
+        <form method="GET" action="{% url 'recipes' %}">
+            <input type="text" name="q" placeholder="Search recipes..." value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+        
+        <a href="{% url 'recipes' %}" class="link link-orange">Clear all</a>
+
     </div>
+    
     {% for recipe in recipes %}
     <div class="recipes-list__item">
         <a href="recipe-detail/{{ recipe.pk }}">
