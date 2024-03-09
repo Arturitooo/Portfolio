@@ -1,43 +1,43 @@
 {% extends 'base_layout.html' %} {% block content %}
 <h1>Here's everything you have to do:</h1>
-<ul>
-  {% for record in records %} {% if record.date == "ASAP!" %}
-  <li>
-    <p style="color: red">
-      {{record.date}}: <b>{{ record.task}}</b>
-      <a href="{% url 'edit_task' record.id %}" style="text-decoration: none"
-        >✏️</a
-      >
-      <a href="{% url 'delete_task' record.id %}" style="text-decoration: none"
-        >❌</a
-      >
-    </p>
-  </li>
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Task</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  {% for record in records %} 
+  <tr>
+    <td>
+  {% if record.date == "ASAP!" %}
+    <span style="color: red">
+      {{record.date}}</span></td> <td><b>{{ record.task}}</b></td>
+      <td><a href="{% url 'edit_task' record.id %}" style="text-decoration: none">✏️</a></td>
+      <td><a href="{% url 'delete_task' record.id %}" style="text-decoration: none">❌</a></td>
+  </tr>
+    
   {% else %}
-  <li>
-    <p>
-      {{record.date}}: <b>{{ record.task}}</b>
-      <a href="{% url 'edit_task' record.id %}" style="text-decoration: none"
-        >✏️</a
-      >
-      <a href="{% url 'delete_task' record.id %}" style="text-decoration: none"
-        >❌</a
-      >
-    </p>
-  </li>
+  <tr>
+    <td>
+      {{record.date}}</td> <td><b>{{ record.task}}</b></td>
+      <td><a href="{% url 'edit_task' record.id %}" style="text-decoration: none">✏️</a></td>
+      <td><a href="{% url 'delete_task' record.id %}" style="text-decoration: none">❌</a></td>
+  </tr>
   {% endif %} {% endfor %}
-</ul>
+</table>
 
 <br />
 <h2>Add new to do:</h2>
 <form method="post">
   {% csrf_token %}
   <div class="form-group">
-    <p>Explain what you're supposed to do:</p>
+    <p>Explain <mark>what you're supposed</mark> to do: <details>Content of your new task</details></p>
     <p>{{ taskform.task }}</p>
-    <br />and when it's supposed to be done:
+    <br />and <mark>when</mark> it's supposed to be done:
     <p>{{taskform.date}}</p>
   </div>
+  <summary>To add your new todo - click the button below</summary>
   <button type="submit">Add new task</button>
 </form>
 <br />

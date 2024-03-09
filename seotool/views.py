@@ -1,4 +1,3 @@
-import requests
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import KeywordForm, GenerateArticleForm
@@ -45,7 +44,7 @@ def keyword_suggestions(request):
                 keyword = form.cleaned_data["keyword"]
                 querystring = {"q": keyword}
                 url = "https://keyword-autosuggest.p.rapidapi.com/autosuggest"
-                response = requests.get(url, headers=headers, params=querystring)
+                response = request.get(url, headers=headers, params=querystring)
 
                 context = {
                     "base_keywords": history_kw_suggestions,
